@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe KOSapiClient::Client do
+describe KOSapiClient::Client, :vcr do
 
   Given(:client) { KOSapiClient::Client.new(ENV['KOSAPI_OAUTH_CLIENT_ID'], ENV['KOSAPI_OAUTH_CLIENT_SECRET']) }
 
