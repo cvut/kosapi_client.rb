@@ -9,7 +9,18 @@ module KOSapiClient
     KOSapiClient::Client.new(client_id, client_secret, root_url)
   end
 
+
   class Client
+    include Resource::CourseEvents
+
+    ##
+    # Creates new KOSapi client with supplied oauth credentials.
+    #
+    # No effort will be made to validate the credentials before
+    # a resource method is called. If you require oauth credentials
+    # validation right after client creation then force oauth
+    # token retrieval with a call to #authorize.
+    #
     def initialize(client_id, client_secret, root_url = KOSAPI_ROOT_URL)
       @client = OAuth2::Client.new(client_id, client_secret, site: root_url, authorize_url: AUTH_URL, token_url: TOKEN_URL)
     end
@@ -19,12 +30,12 @@ module KOSapiClient
     end
 
     def token
-      @token || authorize
+      authorize if !@token || @token.expired?
+      @token
     end
 
-    def course_events
-      token.get('courseEvents')
+    def get(url)
+      token.get(url).parsed
     end
-
   end
 end
