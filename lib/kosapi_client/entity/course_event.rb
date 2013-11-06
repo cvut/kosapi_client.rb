@@ -4,8 +4,6 @@ module KOSapiClient
       def initialize(attributes)
         super
       end
-
-
     end
   end
 end

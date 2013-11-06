@@ -19,23 +19,24 @@ module KOSapiClient
     # No effort will be made to validate the credentials before
     # a resource method is called. If you require oauth credentials
     # validation right after client creation then force oauth
-    # token retrieval with a call to #authorize.
+    # token retrieval with a call to #authenticate.
     #
     def initialize(client_id, client_secret, root_url = KOSAPI_ROOT_URL)
       @client = OAuth2::Client.new(client_id, client_secret, site: root_url, authorize_url: AUTH_URL, token_url: TOKEN_URL)
     end
 
-    def authorize
+    def authenticate
       @token = @client.client_credentials.get_token
     end
 
     def token
-      authorize if !@token || @token.expired?
+      authenticate if !@token || @token.expired?
       @token
     end
 
-    def get(url)
-      token.get(url).parsed
+    def get(url, options = {})
+      parsed_response = token.get(url, params: options).parsed
+      Entity::convert(parsed_response)
     end
   end
 end

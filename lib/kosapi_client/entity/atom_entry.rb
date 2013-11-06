@@ -1,8 +1,8 @@
 module KOSapiClient
   module Entity
-    class AtomEntry
+    class AtomEntry < BaseEntity
        def initialize(attributes)
-         @attrs = attributes
+         super
        end
     end
   end

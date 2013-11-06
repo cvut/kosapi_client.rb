@@ -1,6 +1,6 @@
 # KOSapi Client
 
-A simple ruby client library for KOSapi REST service.
+A simple Ruby client library for KOSapi REST service (https://kosapi.fit.cvut.cz).
 
 ## Installation
 
@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+
+response = client.course_events.all
+response = client.course_events.all
 
 ## Contributing
 
