@@ -18,10 +18,27 @@ Or install it yourself as:
 
 ## Usage
 
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+    client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
 
-response = client.course_events.all
-response = client.course_events.all
+    response = client.course_event.all
+    response = client.course_event.find(12345)
+
+    response = client.parallel.all
+    response = client.parallel.find(12345)
+    response = client.parallel.related_for(12345)
+    response = client.parallel.students_for(12345)
+
+## Priority Resources to implement
+
+    CourseEvents
+    Courses
+    Exams
+    Parallels
+    People
+    Rooms
+    Students
+    Teachers
+
 
 ## Contributing
 
