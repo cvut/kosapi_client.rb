@@ -11,7 +11,7 @@ module KOSapiClient
 
 
   class Client
-    include Resource::CourseEvents
+    #include Resource::CourseEvents
 
     ##
     # Creates new KOSapi client with supplied oauth credentials.
@@ -23,6 +23,8 @@ module KOSapiClient
     #
     def initialize(client_id, client_secret, root_url = KOSAPI_ROOT_URL)
       @client = OAuth2::Client.new(client_id, client_secret, site: root_url, authorize_url: AUTH_URL, token_url: TOKEN_URL)
+
+
     end
 
     def authenticate
@@ -38,5 +40,7 @@ module KOSapiClient
       parsed_response = token.get(url, params: options).parsed
       Entity::convert(parsed_response)
     end
+
+
   end
 end

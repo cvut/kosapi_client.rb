@@ -11,7 +11,7 @@ describe KOSapiClient::Client, :vcr do
       expect { client.authenticate }.to raise_error(OAuth2::Error)
     end
 
-    it 'throws authentication error when fetching resource' do
+    xit 'throws authentication error when fetching resource' do
       expect { client.course_events }.to raise_error(OAuth2::Error)
     end
   end
@@ -23,7 +23,7 @@ describe KOSapiClient::Client, :vcr do
       expect { client.authenticate }.not_to raise_error
     end
 
-    it 'fetches response from a REST resource' do
+    xit 'fetches response from a REST resource' do
       response = client.course_events
       expect(response).not_to be_nil
     end

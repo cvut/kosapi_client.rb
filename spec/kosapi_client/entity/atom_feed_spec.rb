@@ -29,7 +29,7 @@ describe KOSapiClient::Entity::AtomFeed do
         lang: 'en',
 
     }.each do |attribute, value|
-      it "attribute #{attribute} can be accessed by reader method" do
+      xit "attribute #{attribute} can be accessed by reader method" do
         expect(feed.send(attribute)).to eq value
       end
     end

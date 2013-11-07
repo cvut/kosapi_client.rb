@@ -1,6 +1,6 @@
 module KOSapiClient
   module Resource
-    module CourseEvents
+    class CourseEvents
       def course_events(options = {})
         get('courseEvents', options)
       end

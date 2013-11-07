@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr'
 
   spec.add_runtime_dependency 'oauth2'
+  spec.add_runtime_dependency 'activesupport'
 end
