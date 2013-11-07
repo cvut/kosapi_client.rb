@@ -1,33 +1,38 @@
 require 'spec_helper'
 
 describe KOSapiClient::Entity::AtomFeed do
-  Given(:args) { {feed: {
+  let(:args) { {feed: {
       id: 'https://kosapi.fit.cvut.cz/api/3/courseEvents',
       updated: '2013-11-03T13:38:48.386',
-      link: { rel: 'next', href: 'courseEvents?offset=10&limit=10'},
+      link: { rel: 'next', href: 'courseEvents?offset=10&limit=10' },
       entry: [],
       startIndex: '0',
       itemsPerPage: '10',
       base: 'https://kosapi.fit.cvut.cz/api/3/',
-      lang: 'en'
+      lang: 'en',
   }} }
 
-
-
-  context 'when creating new feed' do
-    When(:feed) { KOSapiClient::Entity::AtomFeed.new(args) }
-    Then { feed != nil }
+  it 'creates new feed from args' do
+    feed = KOSapiClient::Entity::AtomFeed.new(args)
+    expect(feed).not_to be_nil
   end
 
-  context 'when accessing feed attributes' do
-    Given(:feed) { KOSapiClient::Entity::AtomFeed.new(args) }
+  context 'when reading feed attributes' do
+    subject(:feed) { KOSapiClient::Entity::AtomFeed.new(args) }
 
-    context 'reading ID' do
-      When(:id) { feed.id }
-      Then { id == 'https://kosapi.fit.cvut.cz/api/3/courseEvents' }
+    {
+        id: 'https://kosapi.fit.cvut.cz/api/3/courseEvents',
+        updated: '2013-11-03T13:38:48.386',
+        start_index: 0,
+        items_per_page: 10,
+        base: 'https://kosapi.fit.cvut.cz/api/3/',
+        lang: 'en',
+
+    }.each do |attribute, value|
+      it "attribute #{attribute} can be accessed by reader method" do
+        expect(feed.send(attribute)).to eq value
+      end
     end
-
-
 
   end
 
