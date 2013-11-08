@@ -8,12 +8,13 @@ module KOSapiClient
     end
 
     def load_resources(module_name)
-      module_name.constants.map{ |c| module_name.const_get(c) }.select { |c| c.is_a? Class }.each { |c| register_resource(c) }
+      module_constants = module_name.constants
+      module_constants.map{ |c| module_name.const_get(c) }.select { |c| c.is_a? Class }.each { |c| register_resource(c) }
     end
 
     def register_resource(clazz)
       @resources ||= {}
-      class_key = clazz.name.underscore.to_sym
+      class_key = clazz.name.demodulize.underscore.to_sym
       @resources[class_key] = clazz.new
 
       this = self
