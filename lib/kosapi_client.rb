@@ -1,5 +1,5 @@
 require 'kosapi_client/version'
 require 'kosapi_client/resource'
 require 'kosapi_client/entity'
-require 'kosapi_client/client'
-require 'kosapi_client/resource_registry'
+require 'kosapi_client/o_auth_http_client'
+require 'kosapi_client/api_client'

@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 module KOSapiClient
   module Entity
     class BaseEntity
@@ -7,8 +9,10 @@ module KOSapiClient
         @attrs = attrs
       end
 
+
+
       def self.data_reader(name, opts = {})
-        path = opts[:path] || :feed
+        path = opts[:path] #|| :feed
         source = opts[:src] || name
         if path
           define_method(name) { @attrs[path][source] }
@@ -16,6 +20,9 @@ module KOSapiClient
           define_method(name) { @attrs[source] }
         end
       end
+
+      data_reader :id
+      data_reader :title
     end
   end
 end
