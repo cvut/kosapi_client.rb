@@ -1,5 +1,6 @@
+require 'active_support/core_ext/hash/keys'
 require 'kosapi_client/version'
 require 'kosapi_client/resource'
 require 'kosapi_client/entity'
-require 'kosapi_client/o_auth_http_client'
+require 'kosapi_client/o_auth_http_adapter'
 require 'kosapi_client/api_client'
