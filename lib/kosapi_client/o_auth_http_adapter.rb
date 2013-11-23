@@ -2,6 +2,7 @@ require 'oauth2'
 
 module KOSapiClient
   class OAuthHttpAdapter
+
     AUTH_URL = 'https://auth.fit.cvut.cz/oauth/oauth/authorize'
     TOKEN_URL = 'https://auth.fit.cvut.cz/oauth/oauth/token'
 

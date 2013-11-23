@@ -1,5 +1,6 @@
 module KOSapiClient
   class ResponseConverter
+
      def process_response(response)
        response = preprocess(response)
        if response.is_paginated?

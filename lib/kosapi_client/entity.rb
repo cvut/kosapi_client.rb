@@ -3,6 +3,7 @@ require 'kosapi_client/entity/course_event'
 
 module KOSapiClient
   module Entity
+
     def self.convert(attrs)
       symbolize_keys!(attrs)
       if is_feed?(attrs)
