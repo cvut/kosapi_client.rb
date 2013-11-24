@@ -19,8 +19,8 @@ module KOSapiClient
     ##
     # Creates a new KOSapi client.
     #
-    def initialize(client)
-      @http_client = client
+    def initialize(http_client)
+      @http_client = http_client
     end
 
   end

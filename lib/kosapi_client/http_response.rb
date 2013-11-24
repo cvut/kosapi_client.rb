@@ -3,9 +3,9 @@ module KOSapiClient
 
     attr_reader :contents
 
-    def initialize(result, response_preprocessor = HTTPResponsePreprocessor.new)
+    def initialize(result, preprocessor = HTTPResponsePreprocessor.new)
       @result = result
-      @contents = response_preprocessor.preprocess(result.parsed)
+      @contents = preprocessor.preprocess(result.parsed)
     end
 
     def is_paginated?
