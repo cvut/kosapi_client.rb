@@ -1,5 +1,8 @@
 require 'kosapi_client/entity/base_entity'
+require 'kosapi_client/entity/link'
+require 'kosapi_client/entity/data_mappings'
 require 'kosapi_client/entity/course_event'
+require 'kosapi_client/entity/result_page'
 
 module KOSapiClient
   module Entity

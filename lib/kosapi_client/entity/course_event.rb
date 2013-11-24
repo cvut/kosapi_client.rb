@@ -1,12 +1,22 @@
 module KOSapiClient
   module Entity
     class CourseEvent < BaseEntity
-      data_reader :capacity, type: Integer
-      data_reader :room
 
-      def initialize(attributes)
-        super
-      end
+      include DataMappings
+
+      map_data :target_branch, Link
+      map_data :capacity, Integer
+      map_data :course, Link
+      map_data :creator, Link
+      map_data :end_date, Time
+      map_data :name
+      map_data :note
+      map_data :occupied, Integer
+      map_data :room, Link
+      map_data :semester, Link
+      map_data :signin_deadline, Time
+      map_data :start_date, Time
+
     end
   end
 end

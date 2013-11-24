@@ -1,6 +1,7 @@
 module KOSapiClient
   module Entity
     class ResultPage
+
       include Enumerable
 
       attr_reader :items, :start_index, :has_next
