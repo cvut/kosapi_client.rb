@@ -15,11 +15,36 @@ module KOSapiClient
     end
 
     def items
-      contents[:feed][:entry]
+      if is_paginated?
+        if contents[:feed][:entry].is_a?(Array)
+          contents[:feed][:entry]
+        else
+          [contents[:feed][:entry]]
+        end
+      else
+        [contents[:entry]]
+      end
+
     end
 
     def each(&block)
-      contents[:feed][:entry].each(&block)
+      items.each(&block)
+    end
+
+    private
+    def detect_type
+      entry_id = sample_entry[:id]
+      extract_type(entry_id)
+    end
+
+    def sample_entry
+      items.first
+    end
+
+    def extract_type(id)
+      type_str = id.split(':')[3]
+      type_name = type_str.camelize
+      Entity.const_get(type_name)
     end
   end
 end
