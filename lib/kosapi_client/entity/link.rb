@@ -3,9 +3,14 @@ module KOSapiClient
     class Link
 
       attr_reader :title, :href
+
+      def initialize(title, href)
+        @title = title
+        @href = href
+      end
+
       def self.parse(contents)
-        @href = contents[:href]
-        @title = contents[:__content__]
+        new(contents[:href], contents[:__content__])
       end
     end
   end

@@ -24,19 +24,23 @@ module KOSapiClient
       else
         [contents[:entry]]
       end
+    end
 
+    def item
+      items.first
     end
 
     def each(&block)
       items.each(&block)
     end
 
-    private
+
     def detect_type
       entry_id = sample_entry[:id]
       extract_type(entry_id)
     end
 
+    private
     def sample_entry
       items.first
     end
