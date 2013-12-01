@@ -18,6 +18,21 @@ module KOSapiClient
 
         def parse(content)
           instance = new()
+          set_mapped_attributes(instance, content)
+          instance
+        end
+
+        def convert_type(value, type)
+          return value.to_i if type == Integer
+          return value if type == String
+          return type.parse(value) if type.respond_to? :parse
+          raise "Unknown type #{type} to convert value #{value} to."
+        end
+
+        def set_mapped_attributes(instance, content)
+          if self.superclass.respond_to? :set_mapped_attributes
+            self.superclass.set_mapped_attributes(instance, content)
+          end
           @@data_mappings[self].each do |name, options|
             value_to_convert = content[name]
             if value_to_convert.nil?
@@ -26,18 +41,7 @@ module KOSapiClient
             end
             value = convert_type(content[name], options[:type])
             instance.send("#{name}=".to_sym, value)
-            #instance.instance_variable_set(name, value)
           end
-          instance
-        end
-
-        def convert_type(value, type)
-          return value.to_i if type == Integer
-          return value if type == String
-          return Time.parse(value) if type == Time
-          return Link.parse(value) if type == Link
-          return Author.parse(value) if type == Author
-          raise "Unknown type #{type} to convert value #{value} to."
         end
       end
     end

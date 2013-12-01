@@ -17,9 +17,14 @@ describe KOSapiClient::Entity::CourseEvent do
                                 start_date: '2010-05-18T14:00:00',
                                 type: ['courseEvent', 'xml']} }
 
-  it 'should parse provided data' do
+  it 'parses provided data' do
     course_event = KOSapiClient::Entity::CourseEvent.parse(course_event_input)
     expect(course_event.capacity).to eq 70
     expect(course_event.course).to be_an_instance_of(KOSapiClient::Entity::Link)
+  end
+
+  it 'parses base attributes' do
+    course_event = KOSapiClient::Entity::CourseEvent.parse(course_event_input)
+    expect(course_event.id).to eq 'urn:cvut:kos:courseevent:220200484405'
   end
 end
