@@ -2,8 +2,6 @@ module KOSapiClient
   module Entity
     class CourseEvent < BaseEntity
 
-      include DataMappings
-
       map_data :target_branch, Link
       map_data :capacity, Integer
       map_data :course, Link

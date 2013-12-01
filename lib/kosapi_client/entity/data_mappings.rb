@@ -36,7 +36,8 @@ module KOSapiClient
           return value if type == String
           return Time.parse(value) if type == Time
           return Link.parse(value) if type == Link
-          raise "Unknown type #{type} to convert to"
+          return Author.parse(value) if type == Author
+          raise "Unknown type #{type} to convert value #{value} to."
         end
       end
     end
