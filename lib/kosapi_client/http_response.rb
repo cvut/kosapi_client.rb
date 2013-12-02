@@ -16,11 +16,7 @@ module KOSapiClient
 
     def items
       if is_paginated?
-        if contents[:feed][:entry].is_a?(Array)
-          contents[:feed][:entry]
-        else
-          [contents[:feed][:entry]]
-        end
+        contents[:feed][:entry]
       else
         [contents[:entry]]
       end

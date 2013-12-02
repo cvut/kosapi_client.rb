@@ -5,7 +5,7 @@ describe KOSapiClient::HTTPResponse do
   let(:result) { Object.new.stub(:parsed, parsed_result) }
   subject(:response) { KOSapiClient::HTTPResponse.new(result) }
 
-  it 'stores all items' do
+  it 'provides all items' do
 
   end
 end

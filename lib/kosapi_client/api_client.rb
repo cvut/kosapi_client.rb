@@ -1,8 +1,8 @@
 module KOSapiClient
 
-  KOSAPI_ROOT_URL = 'https://kosapi.fit.cvut.cz/api/3/'
+  DEFAULT_KOSAPI_ROOT_URL = 'https://kosapi.fit.cvut.cz/api/3/'
 
-  def self.new(credentials, root_url = KOSAPI_ROOT_URL)
+  def self.new(credentials, root_url = DEFAULT_KOSAPI_ROOT_URL)
     http_adapter = OAuthHttpAdapter.new(credentials, root_url)
     http_client = HTTPClient.new(http_adapter)
     KOSapiClient::ApiClient.new(http_client)
