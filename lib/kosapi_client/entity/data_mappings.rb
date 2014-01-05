@@ -25,8 +25,18 @@ module KOSapiClient
         def convert_type(value, type)
           return value.to_i if type == Integer
           return value if type == String
+          return convert_array(value, type.first) if type.is_a?(Array)
+
           return type.parse(value) if type.respond_to? :parse
           raise "Unknown type #{type} to convert value #{value} to."
+        end
+
+        def convert_array(value, type)
+          if value.is_a?(Array)
+            value.map { |it| convert_type(it, type) }
+          else
+            convert_type(value, type)
+          end
         end
 
         def set_mapped_attributes(instance, content)

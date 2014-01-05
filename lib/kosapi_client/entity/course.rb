@@ -4,7 +4,7 @@ module KOSapiClient
       map_data :allowed_enrollment_count, Integer
       map_data :approval_date, Time
       map_data :classes_lang, Enum
-      map_data :classes_type, Enum #todo: possible array?
+      map_data :classes_type, [Enum] #todo: possible array?
       map_data :code
       map_data :completion, Enum
       map_data :credits, Integer
