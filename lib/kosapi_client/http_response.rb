@@ -4,6 +4,7 @@ module KOSapiClient
     include Enumerable
 
     attr_reader :contents
+    attr_accessor :offset
 
     def initialize(result, preprocessor = ResponsePreprocessor.new)
       @result = result
@@ -34,6 +35,11 @@ module KOSapiClient
     def detect_type
       entry_id = sample_entry[:id]
       extract_type(entry_id)
+    end
+
+    def offset
+
+
     end
 
     private

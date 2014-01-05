@@ -7,9 +7,11 @@ module KOSapiClient
     end
 
     def get(url, options = {})
-      response = @http_adapter.get(url)
+      response = @http_adapter.get(url, options)
+      response.offset = options[:offset]
       @response_converter.process_response(response)
     end
+
 
   end
 end

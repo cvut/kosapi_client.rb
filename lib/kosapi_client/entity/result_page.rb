@@ -4,12 +4,11 @@ module KOSapiClient
 
       include Enumerable
 
-      attr_reader :items, :start_index, :has_next
+      attr_reader :items, :start_index
 
-      def initialize(items, start_index, has_next, next_callback)
+      def initialize(items, start_index, next_callback)
         @items = items
         @start_index = start_index
-        @has_next = has_next
         @next_callback = next_callback
       end
 

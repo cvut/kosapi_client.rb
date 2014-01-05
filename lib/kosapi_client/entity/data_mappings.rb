@@ -33,6 +33,7 @@ module KOSapiClient
           if self.superclass.respond_to? :set_mapped_attributes
             self.superclass.set_mapped_attributes(instance, content)
           end
+          raise "Missing data mappings for entity #{self}" unless @@data_mappings[self]
           @@data_mappings[self].each do |name, options|
             value_to_convert = content[name]
             if value_to_convert.nil?

@@ -9,7 +9,7 @@ module KOSapiClient
       #response = preprocess(response)
       if response.is_paginated?
        items = response.map{ |p| convert_type(p, response.detect_type) }
-       Entity::ResultPage.new(items, response.start_index, response.has_next, nil)
+       Entity::ResultPage.new(items, response.offset, nil)
       else
        convert_type(response.content, response.detect_type)
       end
