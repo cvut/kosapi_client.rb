@@ -7,8 +7,12 @@ module KOSapiClient
         @translations = translations
       end
 
-      def to_s(lang = :cs)
-        @translations[lang]
+      def to_s(lang = :cs, default = '')
+        if @translations.has_key?(lang)
+          @translations[lang]
+        else
+          default
+        end
       end
 
       def self.parse(item)
