@@ -1,9 +1,28 @@
 module KOSapiClient
   module Entity
     class MLString
+      attr_reader :translations
+
+      def initialize(translations)
+        @translations = translations
+      end
+
+      def to_s(lang = :cs)
+        @translations[lang]
+      end
+
       def self.parse(item)
-        czech_string = item.find{ |it| it[:'xml:lang'] == 'cs' }
-        czech_string[:__content__] if(czech_string)
+        unless item.is_a?(Array)
+          item = [item]
+        end
+        translations = {}
+        item.each do |it|
+          lang = it[:'xml:lang'].to_sym
+          value = it[:__content__]
+          translations[lang] = value
+        end
+
+        MLString.new(translations)
       end
     end
   end
