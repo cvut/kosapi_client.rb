@@ -1,6 +1,7 @@
 module KOSapiClient
   module Entity
     class MLString
+
       attr_reader :translations
 
       def initialize(translations)
@@ -28,6 +29,7 @@ module KOSapiClient
 
         MLString.new(translations)
       end
+
     end
   end
 end

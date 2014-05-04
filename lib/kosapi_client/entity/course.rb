@@ -1,6 +1,7 @@
 module KOSapiClient
   module Entity
     class Course < BaseEntity
+
       map_data :allowed_enrollment_count, Integer
       map_data :approval_date, Time
       map_data :classes_lang, Enum
