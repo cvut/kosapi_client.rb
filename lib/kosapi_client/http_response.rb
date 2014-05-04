@@ -33,8 +33,8 @@ module KOSapiClient
 
 
     def detect_type
-      entry_id = sample_entry[:id]
-      extract_type(entry_id)
+      type_str = sample_entry[:xsi_type]
+      extract_type(type_str)
     end
 
     def offset
@@ -47,8 +47,7 @@ module KOSapiClient
       items.first
     end
 
-    def extract_type(id)
-      type_str = id.split(':')[3]
+    def extract_type(type_str)
       type_name = type_str.camelize
       Entity.const_get(type_name)
     end

@@ -22,7 +22,7 @@ module KOSapiClient
         end
         translations = {}
         item.each do |it|
-          lang = it[:'xml:lang'].to_sym
+          lang = it[:xml_lang].to_sym
           value = it[:__content__]
           translations[lang] = value
         end
