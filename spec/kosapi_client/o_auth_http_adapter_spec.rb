@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe KOSapiClient::OAuthHttpAdapter, :vcr do
+describe KOSapiClient::OAuth2HttpAdapter, :vcr do
   KOSAPI_ROOT_URL = 'https://kosapi.fit.cvut.cz/api/3/'
-  subject(:client) { KOSapiClient::OAuthHttpAdapter.new(credentials, KOSAPI_ROOT_URL) }
+  subject(:client) { KOSapiClient::OAuth2HttpAdapter.new(credentials, KOSAPI_ROOT_URL) }
 
 
   context 'invalid OAUTH credentials' do
