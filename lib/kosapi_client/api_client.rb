@@ -11,7 +11,9 @@ module KOSapiClient
 
   class ApiClient
 
+    # Include all submodules of KOSapiClient::Resource to this class
     KOSapiClient::Resource.constants.map{|m| KOSapiClient::Resource.const_get(m) }.select { |m| m.is_a? Module }.each{ |m| include m }
+
     #include Resource::CourseEvents
 
     attr_reader :http_client

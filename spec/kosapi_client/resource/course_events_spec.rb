@@ -1,9 +1,10 @@
 require 'spec_helper'
 
-describe 'My behaviour' do
+describe 'Course events resource', :vcr do
+  let(:credentials) { { client_id: ENV['KOSAPI_OAUTH_CLIENT_ID'], client_secret: ENV['KOSAPI_OAUTH_CLIENT_SECRET'] } }
+  subject(:client) {  KOSapiClient.new(credentials) }
 
-  it 'should do something' do
-
-    true.should == false
+  it 'returns course events' do
+    expect(client.course_events).not_to be_nil
   end
 end
