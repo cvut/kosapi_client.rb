@@ -4,6 +4,7 @@ require 'active_support/inflector'
 require 'kosapi_client/entity'
 require 'kosapi_client/resource'
 
+require 'kosapi_client/request_builder'
 require 'kosapi_client/api_client'
 require 'kosapi_client/hash_utils'
 require 'kosapi_client/http_client'
