@@ -3,7 +3,7 @@
 [![Build Status](http://img.shields.io/travis/flexik/kosapi_client.svg)][travis]
 [![Dependency Status](http://img.shields.io/gemnasium/flexik/kosapi_client.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/flexik/kosapi_client.svg)][codeclimate]
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/cvut/sirius.svg))][codeclimate]
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/flexik/kosapi_client.svg)][codeclimate]
 
 [travis]: http://travis-ci.org/flexik/kosapi_client
 [gemnasium]: https://gemnasium.com/flexik/kosapi_client
