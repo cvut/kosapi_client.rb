@@ -1,44 +1,53 @@
 # KOSapi Client
 
-A simple Ruby client library for KOSapi REST service (https://kosapi.fit.cvut.cz).
+[![Build Status](http://img.shields.io/travis/flexik/kosapi_client.svg)][travis]
+[![Dependency Status](http://img.shields.io/gemnasium/flexik/kosapi_client.svg)][gemnasium]
+[![Code Climate](http://img.shields.io/codeclimate/github/flexik/kosapi_client.svg)][codeclimate]
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/cvut/sirius.svg))][codeclimate]
+
+[travis]: http://travis-ci.org/flexik/kosapi_client
+[gemnasium]: https://gemnasium.com/flexik/kosapi_client
+[codeclimate]: https://codeclimate.com/github/flexik/kosapi_client
+
+A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvut.cz).
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'kosapi_client'
+    gem 'kosapi_client', github: 'flexik/kosapi_client'
 
 And then execute:
 
     $ bundle
 
+<!--
 Or install it yourself as:
 
     $ gem install kosapi_client
+-->
 
-## Usage
+## Basic usage
 
+    # Creates a new instance of client with OAuth2 credentials
     client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
 
-    response = client.course_event.all
-    response = client.course_event.find(12345)
+    # Retrieves first page of all course events
+    course_events_page = client.course_events
+    course_events_page.each { |event| do_stuff_with_event(event) }
 
-    response = client.parallel.all
-    response = client.parallel.find(12345)
-    response = client.parallel.related_for(12345)
-    response = client.parallel.students_for(12345)
+    # Fetches page of parallels according to API parameters
+    parallels_page = client.parallels(offset: 0, limit: 50, query: 'course.department=18*')
 
+<!--
 ## Priority Resources to implement
 
-    CourseEvents
-    Courses
     Exams
-    Parallels
     People
     Rooms
     Students
     Teachers
-
+-->
 
 ## Contributing
 
