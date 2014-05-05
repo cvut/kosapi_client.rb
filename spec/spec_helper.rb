@@ -22,3 +22,5 @@ VCR.configure do |c|
   }
   c.cassette_library_dir = 'spec/cassettes'
 end
+
+VCR.turn_off! ignore_cassettes: true if ENV['TRAVIS']
