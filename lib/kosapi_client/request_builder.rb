@@ -1,33 +1,19 @@
 module KOSapiClient
   class RequestBuilder
 
+    attr_reader :response
 
-
-    def initialize(root_url, http_client)
+    def initialize(root_url, http_client, url_builder = URLBuilder.new(root_url))
       @root_url = root_url
       @http_client = http_client
       @operation = :get
-      @finalized = false
-    end
-
-    def method_missing(method, *args)
-      finalize unless @finalized
-
-      if @result.respond_to?(method)
-        @result.send(method, *args)
-      else
-        super
-      end
+      @body = nil
+      @headers = []
+      @url_builder = url_builder
     end
 
     def finalize
-      @finalized = true
-      request_url = build_url
-      @result = @http_client.send_request(@operation, request_url)
-    end
-
-    def build_url
-
+      @response = @http_client.send_request(@operation, @url_builder.url, @body, @headers)
     end
 
   end
