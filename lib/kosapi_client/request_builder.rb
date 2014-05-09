@@ -1,6 +1,8 @@
 module KOSapiClient
   class RequestBuilder
 
+
+
     def initialize(root_url, http_client)
       @root_url = root_url
       @http_client = http_client
@@ -18,7 +20,6 @@ module KOSapiClient
       end
     end
 
-    private
     def finalize
       @finalized = true
       request_url = build_url
