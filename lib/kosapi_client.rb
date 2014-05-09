@@ -1,9 +1,11 @@
 require 'active_support/core_ext/hash/keys'
 require 'active_support/inflector'
+require 'uri_template'
 
 require 'kosapi_client/entity'
 require 'kosapi_client/resource'
 
+require 'kosapi_client/url_builder'
 require 'kosapi_client/request_builder'
 require 'kosapi_client/request_builder_delegator'
 require 'kosapi_client/api_client'
