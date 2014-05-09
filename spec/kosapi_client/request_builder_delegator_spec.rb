@@ -28,5 +28,15 @@ describe KOSapiClient::RequestBuilderDelegator do
     expect { delegator.foo }.to raise_error(NoMethodError)
   end
 
+  it 'responds to methods on builder' do
+    allow(builder).to receive(:foo)
+    expect(delegator).to respond_to(:foo)
+  end
+
+  it 'responds to methods on response when evaluated' do
+    allow(response).to receive(:foo)
+    delegator.foo
+    expect(delegator).to respond_to(:foo)
+  end
 
 end

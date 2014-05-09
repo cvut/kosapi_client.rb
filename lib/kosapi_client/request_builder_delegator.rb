@@ -9,15 +9,19 @@ module KOSapiClient
     alias :super_method_missing :method_missing
 
     def method_missing(method, *args)
-      if @response.nil?
-        delegate_to_builder(method, *args)
-      else
+      if @response
         delegate_to_response(method, *args)
+      else
+        delegate_to_builder(method, *args)
       end
     end
 
-    def respond_to?(method)
-
+    def respond_to_missing?(method, include_all)
+      if @response
+        @response.respond_to?(method, include_all)
+      else
+        @request_builder.respond_to?(method, include_all)
+      end
     end
 
     private
