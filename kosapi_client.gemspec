@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'oauth2'
   spec.add_runtime_dependency 'faraday', '~> 0.8.9' # VCR does not work with newer versions yet
   spec.add_runtime_dependency 'activesupport'
-  spec.add_runtime_dependency 'escape_utils' # used for uri_template
+  spec.add_runtime_dependency 'escape_utils' unless RUBY_PLATFORM == 'java' # used for uri_template
   spec.add_runtime_dependency 'uri_template'
 end
