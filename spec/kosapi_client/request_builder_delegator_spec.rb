@@ -30,8 +30,12 @@ describe KOSapiClient::RequestBuilderDelegator do
       expect { delegator.foo }.to raise_error(NoMethodError)
     end
 
-  end
+    it 'replaces builder.self with self' do
+      allow(builder).to receive(:foo).and_return(builder)
+      expect(delegator.foo).to be delegator
+    end
 
+  end
 
   describe '#respond_to_missing?' do
 

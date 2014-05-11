@@ -35,7 +35,12 @@ module KOSapiClient
 
     def delegate_to_builder(method, *args)
       if @request_builder.respond_to?(method)
-        @request_builder.send(method, *args)
+        res = @request_builder.send(method, *args)
+        if res.equal?(@request_builder)
+          self
+        else
+          res
+        end
       else
         @request_builder.finalize
         @response = @request_builder.response
