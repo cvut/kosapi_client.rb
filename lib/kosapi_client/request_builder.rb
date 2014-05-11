@@ -3,6 +3,10 @@ module KOSapiClient
 
     attr_reader :response
 
+    def find(id)
+      @url_builder.set_path(id)
+    end
+
     def initialize(root_url, http_client, url_builder = URLBuilder.new(root_url))
       @root_url = root_url
       @http_client = http_client
