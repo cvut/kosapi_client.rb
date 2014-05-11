@@ -7,17 +7,7 @@ describe KOSapiClient::RequestBuilder do
   let(:http_client) { double(send_request: response) }
   subject(:builder) { KOSapiClient::RequestBuilder.new('http://example.com', http_client, url_builder) }
 
-  def self.method_name(name=description)
-    name[1..-1].to_sym
-  end
 
-  shared_examples_for 'fluent api command' do |method, *args|
-
-    it 'returns self' do
-      expect(builder.send(method, *args)).to be builder
-    end
-
-  end
 
   describe '#finalize' do
 
