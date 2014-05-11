@@ -2,10 +2,22 @@ require 'spec_helper'
 
 describe KOSapiClient::RequestBuilder do
 
-  let(:url_builder) { instance_double(KOSapiClient::URLBuilder, url: 'http://example.com') }
+  let(:url_builder) { instance_double(KOSapiClient::URLBuilder, url: 'http://example.com', set_path: nil, set_query_param: nil) }
   let(:response) { double(foo: :bar) }
   let(:http_client) { double(send_request: response) }
   subject(:builder) { KOSapiClient::RequestBuilder.new('http://example.com', http_client, url_builder) }
+
+  def self.method_name(name=description)
+    name[1..-1].to_sym
+  end
+
+  shared_examples_for 'fluent api command' do |method, *args|
+
+    it 'returns self' do
+      expect(builder.send(method, *args)).to be builder
+    end
+
+  end
 
   describe '#finalize' do
 
@@ -23,11 +35,51 @@ describe KOSapiClient::RequestBuilder do
 
   describe '#find' do
 
+    it_behaves_like 'fluent api command', method_name, 10
+
     it 'sets path in URL' do
-      expect(url_builder).to receive(:set_path)
+      expect(url_builder).to receive(:set_path).with(10)
       builder.find(10)
     end
 
   end
+
+  describe '#offset' do
+
+    it_behaves_like 'fluent api command', method_name, 10
+
+    it 'sets query param' do
+      expect(url_builder).to receive(:set_query_param).with(:offset, 10)
+      builder.offset(10)
+    end
+
+  end
+
+  describe '#limit' do
+
+    it_behaves_like 'fluent api command', method_name, 10
+
+    it 'sets query param' do
+      expect(url_builder).to receive(:set_query_param).with(:limit, 10)
+      builder.limit(10)
+    end
+
+  end
+
+  describe '#query' do
+
+    it_behaves_like 'fluent api command', method_name, foo: 10
+
+    it 'sets query param' do
+      expect(url_builder).to receive(:set_query_param).with(:query, 'foo=10;bar=20')
+      builder.query(foo: 10, bar: 20)
+    end
+
+    it 'throws error when params are empty' do
+      expect { builder.query() }.to raise_error(RuntimeError)
+    end
+
+  end
+
 
 end
