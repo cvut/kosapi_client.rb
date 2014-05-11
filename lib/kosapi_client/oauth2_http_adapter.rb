@@ -13,7 +13,11 @@ module KOSapiClient
     end
 
     def get(url, options = {})
-      result = token.get(url, params: options)
+      send_request(:get, url, options)
+    end
+
+    def send_request(verb, url, options = {})
+      result = token.request(verb, url, options)
       KOSapiClient::HTTPResponse.new(result)
     end
 
