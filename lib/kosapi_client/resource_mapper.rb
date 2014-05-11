@@ -9,7 +9,8 @@ module KOSapiClient
 
       def resource(name)
         define_method name do
-          create_builder name
+          builder = create_builder name
+          RequestBuilderDelegator.new(builder)
         end
       end
 

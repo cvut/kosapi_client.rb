@@ -16,6 +16,12 @@ describe KOSapiClient::ResourceMapper do
       expect(dummy_instance).to respond_to(:foo)
     end
 
+    it 'creates method which returns builder delegator' do
+      dummy_class.resource(:foo)
+      allow(dummy_instance).to receive(:create_builder)
+      expect(dummy_instance.foo).to be_an_instance_of(KOSapiClient::RequestBuilderDelegator)
+    end
+
     it 'calls #create_builder' do
       dummy_class.resource(:foo)
       expect(dummy_instance).to receive(:create_builder).with(:foo)
