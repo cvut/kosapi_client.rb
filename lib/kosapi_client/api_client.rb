@@ -30,7 +30,7 @@ module KOSapiClient
     end
 
     def create_builder(resource_name)
-      builder_name = (resource_name[0].capitalize + resource_name[1..-1] + 'Builder').to_sym
+      builder_name = "#{resource_name}_builder".camelize.to_sym
       KOSapiClient::Resource.constants.each do |m|
         constant = KOSapiClient::Resource.const_get(m)
         if constant.is_a?(Class) && m == builder_name

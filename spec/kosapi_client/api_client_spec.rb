@@ -13,9 +13,9 @@ describe KOSapiClient::ApiClient do
   end
 
   it 'creates custom builder for resource when defined' do
-    class KOSapiClient::Resource::FooBuilder < KOSapiClient::RequestBuilder; end
+    class KOSapiClient::Resource::FooBarBuilder < KOSapiClient::RequestBuilder; end
 
-    builder = client.create_builder(:foo)
-    expect(builder).to be_an_instance_of KOSapiClient::Resource::FooBuilder
+    builder = client.create_builder(:foo_bar)
+    expect(builder).to be_an_instance_of KOSapiClient::Resource::FooBarBuilder
   end
 end
