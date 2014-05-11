@@ -30,6 +30,13 @@ module KOSapiClient
     end
 
     def create_builder(resource_name)
+      builder_name = (resource_name[0].capitalize + resource_name[1..-1] + 'Builder').to_sym
+      KOSapiClient::Resource.constants.each do |m|
+        constant = KOSapiClient::Resource.const_get(m)
+        if constant.is_a?(Class) && m == builder_name
+          return constant.new(@root_url + resource_name.to_s, @http_client)
+        end
+      end
       RequestBuilder.new(@root_url + resource_name.to_s, @http_client)
     end
 
