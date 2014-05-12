@@ -16,10 +16,33 @@ module KOSapiClient
           @@data_mappings[self][name] = opts
         end
 
+        # Parses composed domain type from hash response structure.
+        #
+        # @param [Hash] content hash structure from API response corresponding to single domain object
+        # @return [BaseEntity] parsed domain object
         def parse(content)
           instance = new()
           set_mapped_attributes(instance, content)
           instance
+        end
+
+        # Creates new domain object instance and sets values
+        # of mapped domain object attributes from source hash.
+        # Attributes are mapped by .map_data method.
+        def set_mapped_attributes(instance, content)
+          if self.superclass.respond_to? :set_mapped_attributes
+            self.superclass.set_mapped_attributes(instance, content)
+          end
+          raise "Missing data mappings for entity #{self}" unless @@data_mappings[self]
+          @@data_mappings[self].each do |name, options|
+            value_to_convert = content[name]
+            if value_to_convert.nil?
+              raise "Missing value for attribute #{name}" if options[:required]
+              next
+            end
+            value = convert_type(content[name], options[:type])
+            instance.send("#{name}=".to_sym, value)
+          end
         end
 
         def convert_type(value, type)
@@ -39,21 +62,7 @@ module KOSapiClient
           end
         end
 
-        def set_mapped_attributes(instance, content)
-          if self.superclass.respond_to? :set_mapped_attributes
-            self.superclass.set_mapped_attributes(instance, content)
-          end
-          raise "Missing data mappings for entity #{self}" unless @@data_mappings[self]
-          @@data_mappings[self].each do |name, options|
-            value_to_convert = content[name]
-            if value_to_convert.nil?
-              raise "Missing value for attribute #{name}" if options[:required]
-              next
-            end
-            value = convert_type(content[name], options[:type])
-            instance.send("#{name}=".to_sym, value)
-          end
-        end
+
       end
     end
   end
