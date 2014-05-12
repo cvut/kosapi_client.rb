@@ -8,7 +8,7 @@ describe KOSapiClient::HTTPClient do
 
   describe '#send_request' do
 
-    it 'should call http adapter' do
+    it 'calls http adapter' do
       expect(http_adapter).to receive(:send_request)
       client.send_request(:get, 'http://example.com')
     end
