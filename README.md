@@ -38,7 +38,10 @@ Or install it yourself as:
     course_events_page.each { |event| do_stuff_with_event(event) }
 
     # Fetches page of parallels according to API parameters
-    parallels_page = client.parallels(offset: 0, limit: 50, query: 'course.department=18*')
+    parallels_page = client.parallels.offset(0).limit(50).query('course.department' => '18*')
+
+    # Finds all parallels related to parallel with id = 42
+    client.parallels.find(42).related
 
 <!--
 ## Priority Resources to implement
