@@ -12,12 +12,10 @@ module KOSapiClient
   class ApiClient
     include ResourceMapper
 
-    #resource :parallels
-
-    # Include all submodules of KOSapiClient::Resource to this class
-    KOSapiClient::Resource.constants.map{|m| KOSapiClient::Resource.const_get(m) }.select { |m| m.is_a? Module }.each{ |m| include m }
-
-    #include Resource::CourseEvents
+    # accessible resources definition
+    resource :courses
+    resource :course_events
+    resource :parallels
 
     attr_reader :http_client
 
@@ -31,15 +29,20 @@ module KOSapiClient
 
     def create_builder(resource_name)
       builder_name = "#{resource_name}_builder".camelize.to_sym
+      builder_class = find_builder_class(builder_name)
+      builder_class.new(@root_url + resource_name.to_s, @http_client)
+    end
+
+    private
+    def find_builder_class(builder_name)
       KOSapiClient::Resource.constants.each do |m|
         constant = KOSapiClient::Resource.const_get(m)
         if constant.is_a?(Class) && m == builder_name
-          return constant.new(@root_url + resource_name.to_s, @http_client)
+          return constant
         end
       end
-      RequestBuilder.new(@root_url + resource_name.to_s, @http_client)
+      RequestBuilder
     end
-
 
   end
 end

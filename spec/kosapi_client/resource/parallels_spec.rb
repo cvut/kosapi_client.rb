@@ -6,9 +6,8 @@ describe 'Parallels resource', :vcr do
   subject(:client) {  KOSapiClient.new(credentials) }
 
   it 'fetches parallels list' do
-
-    page = client.parallels(offset: 0, limit: 50, query: 'course.department=18*')
+    page = client.parallels.offset(0).limit(50).query('course.department' => '18*')
     expect(page.items.count).to eq 50
-
   end
+
 end
