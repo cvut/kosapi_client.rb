@@ -11,7 +11,7 @@ module KOSapiClient
       end
 
       def self.parse(contents)
-        new(contents[:href], contents[:__content__], contents[:rel])
+        new(contents[:__content__], contents[:href], contents[:rel])
       end
     end
   end
