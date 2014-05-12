@@ -54,14 +54,17 @@ module KOSapiClient
           raise "Unknown type #{type} to convert value #{value} to."
         end
 
-        def convert_array(value, type)
-          if value.is_a?(Array)
-            value.map { |it| convert_type(it, type) }
+        # Converts values of array type to proper domain objects.
+        # It checks whether the value is really an array, because
+        # when API returns a single value it does not get parsed
+        # into an array.
+        def convert_array(values, type)
+          if values.is_a?(Array)
+            values.map { |it| convert_type(it, type) }
           else
-            convert_type(value, type)
+            convert_type(values, type)
           end
         end
-
 
       end
     end

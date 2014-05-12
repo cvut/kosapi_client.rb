@@ -40,6 +40,22 @@ describe KOSapiClient::Entity::DataMappings do
       expect(parsed.foo).to eq :bar
     end
 
+    it 'throws error when required attribute is missing' do
+      dummy_class.map_data :foo, String, required: true
+      expect { dummy_class.parse({}) }.to raise_error(RuntimeError)
+    end
+
+    it 'sets attribute to nil when not required attribute is missing' do
+      dummy_class.map_data :foo, String
+      parsed = dummy_class.parse({})
+      expect(parsed.foo).to be_nil
+    end
+
+    it 'throws error on type without parse method' do
+      dummy_class.map_data :foo, Object
+      expect{ dummy_class.parse({foo: 'bar'}) }.to raise_error(RuntimeError)
+    end
+
   end
 
 end

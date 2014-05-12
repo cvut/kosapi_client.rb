@@ -31,7 +31,6 @@ module KOSapiClient
       items.each(&block)
     end
 
-
     def detect_type
       type_str = sample_entry[:xsi_type]
       extract_type(type_str)
