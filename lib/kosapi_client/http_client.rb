@@ -6,9 +6,9 @@ module KOSapiClient
       @response_converter = response_converter
     end
 
-    def get(url, options = {})
-      response = @http_adapter.get(url, options)
-      response.offset = options[:offset]
+    def send_request(verb, url, options = {})
+      response = @http_adapter.send_request(verb, url, options)
+      #response.offset = options[:offset]
       @response_converter.process_response(response)
     end
 

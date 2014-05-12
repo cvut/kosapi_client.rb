@@ -31,12 +31,13 @@ module KOSapiClient
       @http_client = http_client
       @operation = :get
       @body = nil
-      @headers = []
+      @headers = {}
       @url_builder = url_builder
     end
 
     def finalize
-      @response = @http_client.send_request(@operation, @url_builder.url, @body, @headers)
+      options = {headers: @headers, body: @body }
+      @response = @http_client.send_request(@operation, @url_builder.url, options)
     end
 
     private
