@@ -29,20 +29,25 @@ module KOSapiClient
         # Creates new domain object instance and sets values
         # of mapped domain object attributes from source hash.
         # Attributes are mapped by .map_data method.
-        def set_mapped_attributes(instance, content)
+        def set_mapped_attributes(instance, source_hash)
           if self.superclass.respond_to? :set_mapped_attributes
-            self.superclass.set_mapped_attributes(instance, content)
+            self.superclass.set_mapped_attributes(instance, source_hash)
           end
           raise "Missing data mappings for entity #{self}" unless @@data_mappings[self]
           @@data_mappings[self].each do |name, options|
-            value_to_convert = content[name]
-            if value_to_convert.nil?
-              raise "Missing value for attribute #{name}" if options[:required]
-              next
-            end
-            value = convert_type(content[name], options[:type])
-            instance.send("#{name}=".to_sym, value)
+            set_mapped_attribute(instance, name, source_hash, options)
           end
+        end
+
+        private
+        def set_mapped_attribute(instance, name, source_hash, mapping_options)
+          value = source_hash[name]
+          if value.nil?
+            raise "Missing value for attribute #{name}" if mapping_options[:required]
+            return
+          end
+          value = convert_type(value, mapping_options[:type])
+          instance.send("#{name}=".to_sym, value)
         end
 
         def convert_type(value, type)
