@@ -61,7 +61,7 @@ describe KOSapiClient::RequestBuilder do
     it_behaves_like 'fluent api command', method_name, foo: 10
 
     it 'sets query param' do
-      expect(url_builder).to receive(:set_query_param).with(:query, 'foo=10;bar=20')
+      expect(url_builder).to receive(:set_query_param).with(:query, 'foo==10;bar==20')
       builder.query(foo: 10, bar: 20)
     end
 
