@@ -2,18 +2,19 @@ module KOSapiClient
   module Entity
     class MLString
 
+      DEFAULT_LANGUAGE = :en
       attr_reader :translations
 
-      def initialize(translations)
+      def initialize(translations, default_language = DEFAULT_LANGUAGE)
         @translations = translations
+        @default_language = default_language
       end
 
-      def to_s(lang = :cs, default = '')
-        if @translations.has_key?(lang)
-          @translations[lang]
-        else
-          default
+      def to_s(lang = :implicit)
+        if lang == :implicit
+          lang = select_lang
         end
+        @translations[lang]
       end
 
       def self.parse(item)
@@ -28,6 +29,12 @@ module KOSapiClient
         end
 
         MLString.new(translations)
+      end
+
+      private
+      def select_lang
+        return @default_language if @translations.key?(@default_language)
+        @translations.keys.first
       end
 
     end
