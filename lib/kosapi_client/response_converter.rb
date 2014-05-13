@@ -7,28 +7,34 @@ module KOSapiClient
 
   class ResponseConverter
 
-    def initialize()
+    # Returns processed entries converted into domain objects
+    # wrapped into ResultPage class instance.
+    # @param items [Array] Array of hashes corresponding to entries
+    # @return [ResultPage] ResultPage of domain objects
 
+    def convert_paginated(items)
+      converted_items = items.map{ |p| convert_type(p, detect_type(p)) }
+      Entity::ResultPage.new(converted_items, 0, nil)
     end
 
-    # Returns processed response converted into domain objects.
-    # When called resource can return collection of objects
-    # @param response [HTTPResponse] API response in hash format
-    # @return [ResultPage] ResultPage or single domain object
-
-    def process_response(response)
-      #response = preprocess(response)
-      if response.is_paginated?
-       items = response.map{ |p| convert_type(p, response.detect_type) }
-       Entity::ResultPage.new(items, response.offset, nil)
-      else
-       convert_type(response.content, response.detect_type)
-      end
+    def convert_single(item)
+      type = detect_type(item)
+      convert_type(item, type)
     end
 
     private
-    def convert_type(response_part, type)
-      type.parse(response_part)
+    def convert_type(hash, type)
+      type.parse(hash)
+    end
+
+    def detect_type(hash)
+      type_str = hash[:xsi_type]
+      extract_type(type_str)
+    end
+
+    def extract_type(type_str)
+      type_name = type_str.camelize
+      Entity.const_get(type_name)
     end
 
   end
