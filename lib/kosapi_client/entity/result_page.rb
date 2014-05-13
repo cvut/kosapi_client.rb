@@ -20,7 +20,7 @@ module KOSapiClient
         @next_callback.call if(@next_callback)
       end
 
-      def items_count
+      def count
         @items.count
       end
 
