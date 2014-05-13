@@ -3,6 +3,7 @@ module KOSapiClient
 
     include Enumerable
 
+    attr_reader :contents
 
     def initialize(result, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new)
       @result = result
