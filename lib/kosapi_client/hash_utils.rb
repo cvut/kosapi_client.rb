@@ -1,10 +1,6 @@
 module KOSapiClient
   module HashUtils
 
-    def self.symbolize_keys(attrs)
-      deep_transform_hash_keys(attrs) { |key| key.to_sym rescue key }
-    end
-
     def self.deep_transform_hash_keys(item, &block)
       return item unless item.is_a?(Hash)
       copy = {}

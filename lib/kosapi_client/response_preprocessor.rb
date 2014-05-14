@@ -11,7 +11,7 @@ module KOSapiClient
 
     private
     def stringify_keys(response)
-      HashUtils::deep_transform_hash_keys(response) { |key| key.underscore.sub(':', '_').to_sym rescue key }
+      HashUtils.deep_transform_hash_keys(response) { |key| key.underscore.sub(':', '_').to_sym rescue key }
     end
 
     def entries_to_array(hash)
