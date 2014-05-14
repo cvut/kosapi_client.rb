@@ -5,6 +5,7 @@ require 'uri_template'
 require 'kosapi_client/entity'
 require 'kosapi_client/resource'
 
+require 'kosapi_client/configuration'
 require 'kosapi_client/url_builder'
 require 'kosapi_client/request_builder'
 require 'kosapi_client/request_builder_delegator'
