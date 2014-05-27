@@ -26,6 +26,8 @@ module KOSapiClient
       self
     end
 
+    alias where query
+
     def initialize(root_url, http_client, url_builder = URLBuilder.new(root_url))
       @root_url = root_url
       @http_client = http_client
