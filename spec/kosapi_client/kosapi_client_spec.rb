@@ -9,8 +9,29 @@ describe KOSapiClient do
     end
   end
 
-  it 'can be configured via block' do
-    expect(@client).not_to be_nil
+  describe '.configure' do
+
+    it 'can be configured via block' do
+      expect(@client).not_to be_nil
+    end
+
+  end
+
+  describe '.reset' do
+
+    it 'cleans stored ApiClient instance' do
+      KOSapiClient.reset
+      expect(KOSapiClient.client).to be_nil
+    end
+
+  end
+
+  describe '.client' do
+
+    it 'provides client instance via reader' do
+      expect(KOSapiClient.client).to eq @client
+    end
+
   end
 
   it 'delegates missing methods to stored client instance' do

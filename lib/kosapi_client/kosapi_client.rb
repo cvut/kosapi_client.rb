@@ -4,6 +4,8 @@ module KOSapiClient
 
   singleton_class.class_eval do
 
+    attr_reader :client
+
     def new(credentials, root_url = DEFAULT_KOSAPI_ROOT_URL)
       http_adapter = OAuth2HttpAdapter.new(credentials, root_url)
       http_client = HTTPClient.new(http_adapter)

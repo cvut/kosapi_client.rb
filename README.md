@@ -50,8 +50,8 @@ client.parallels.find(42)
 ```
     
 The other way is to use configure client using `KOSapiClient.configure` and setting options inside block.
-In addition to returning the client instance from `configure`, the client is also stored in `KOSapiClient` singleton property and its method can be accessed by calling them on `KOSapiClient` directly.
-This approach is more suitable for configuring client inside initializer. 
+In addition to returning the client instance from `configure`, the client is also stored in `KOSapiClient` singleton property and its methods can be accessed by calling them on `KOSapiClient` directly.
+This approach is more suitable for configuring client inside an initializer. 
  
 ```ruby
 KOSapiClient.configure do |c|
