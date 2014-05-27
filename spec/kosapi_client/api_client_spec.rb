@@ -27,5 +27,18 @@ describe KOSapiClient::ApiClient do
     expect(client).not_to be_nil
   end
 
+  it 'delegates missing methods to stored client instance' do
+    client = KOSapiClient.configure do |c|
+      c.client_id = 'foo'
+      c.client_secret = 'bar'
+    end
+    expect(client).to receive(:course_events)
+    KOSapiClient.course_events
+  end
+
+  it 'handles missing methods not defined on client correctly' do
+
+  end
+
 
 end
