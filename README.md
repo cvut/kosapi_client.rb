@@ -30,28 +30,47 @@ Or install it yourself as:
 
 ## Basic usage
 
+```ruby
+
     # Creates a new instance of client with OAuth2 credentials
     client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
-
+    
     # Retrieves first page of all course events
     course_events_page = client.course_events
     course_events_page.each { |event| do_stuff_with_event(event) }
-
+    
     # Fetches page of parallels according to API parameters
     parallels_page = client.parallels.offset(0).limit(50).query('course.department' => '18*')
-
+    
     # Finds all parallels related to parallel with id = 42
     client.parallels.find(42).related
+```
 
-<!--
-## Priority Resources to implement
+## Configuration
 
-    Exams
-    People
-    Rooms
-    Students
-    Teachers
--->
+KOSapiClient can be created and configured in two ways.
+The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
+
+```ruby
+
+    client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+    client.parallels.find(42)
+```
+    
+The other way is to use configure client using `KOSapiClient.configure` and setting options inside block.
+In addition to returning the client instance from `configure`, the client is also stored in `KOSapiClient` singleton property and its method can be accessed by calling them on `KOSapiClient` directly.
+This approach is more suitable for configuring client inside initializer. 
+ 
+```ruby
+
+    KOSapiClient.configure do |c|
+      c.client_id = ENV['KOSAPI_OAUTH_CLIENT_ID']
+      c.client_secret = ENV['KOSAPI_OAUTH_CLIENT_SECRET']
+    end
+    
+    KOSapiClient.parallels.find(42)
+```
+
 
 ## Contributing
 
