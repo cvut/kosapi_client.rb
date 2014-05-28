@@ -3,6 +3,7 @@ require 'spec_helper'
 describe KOSapiClient::Entity::DataMappings do
 
   let(:dummy_class) { Class.new { include KOSapiClient::Entity::DataMappings } }
+  let(:derived_class) { Class.new(dummy_class) }
   let(:dummy_instance) { dummy_class.new }
 
   it 'defines .parse class method' do
@@ -15,7 +16,7 @@ describe KOSapiClient::Entity::DataMappings do
 
   describe '.parse' do
 
-    it 'parses simple hash structure' do
+    it 'parses to string by default' do
       dummy_class.map_data :foo
       parsed = dummy_class.parse({foo: 'bar'})
       expect(parsed).to be_an_instance_of(dummy_class)
@@ -54,6 +55,66 @@ describe KOSapiClient::Entity::DataMappings do
     it 'throws error on type without parse method' do
       dummy_class.map_data :foo, Object
       expect{ dummy_class.parse({foo: 'bar'}) }.to raise_error(RuntimeError)
+    end
+
+  end
+
+  describe '.map_data' do
+
+    it 'maps parent attributes' do
+      dummy_class.map_data :foo
+      derived_class.map_data :bar
+      instance = derived_class.parse({foo: '123', bar: '456'})
+      expect(instance).to respond_to(:foo, :bar)
+    end
+
+    it 'does not map child attributes' do
+      dummy_class.map_data :foo
+      derived_class.map_data :bar
+      instance = dummy_class.parse({foo: '123', bar: '456'})
+      expect(instance).to respond_to(:foo)
+      expect(instance).not_to respond_to(:bar)
+    end
+
+  end
+
+  describe '#to_hash' do
+
+    it 'converts mapped attributes to a hash' do
+      dummy_class.map_data :foo
+      instance = dummy_class.parse({foo: 'bar'})
+      expect(instance.to_hash).to eq({foo: 'bar'})
+    end
+
+    it 'converts class hierarchy attributes to a hash' do
+      dummy_class.map_data :foo
+      derived_class.map_data :bar
+      instance = derived_class.parse({foo: '123', bar: '456'})
+      expect(instance.to_hash).to eq({foo: '123', bar: '456'})
+    end
+
+    it 'converts array to a hash' do
+      dummy_class.map_data :foo, [Integer]
+      instance = dummy_class.parse({foo: %w(123 456)})
+      expect(instance.to_hash).to eq({foo: [123, 456]})
+    end
+
+    it 'converts nested instances' do
+      dummy_class.map_data :foo
+      instance = dummy_class.new()
+      instance2 = dummy_class.new()
+      instance.foo = instance2
+      instance2.foo = 'bar'
+      expect(instance.to_hash).to eq({foo: {foo: 'bar'}})
+    end
+
+    it 'converts array of nested instances' do
+      dummy_class.map_data :foo
+      instance = dummy_class.new()
+      instance2 = dummy_class.new()
+      instance.foo = [instance2]
+      instance2.foo = 'bar'
+      expect(instance.to_hash).to eq({foo: [{foo: 'bar'}]})
     end
 
   end

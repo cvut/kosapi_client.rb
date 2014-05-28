@@ -6,14 +6,37 @@ module KOSapiClient
         base.extend(ClassMethods)
       end
 
+      def to_hash
+        result = {}
+        self.class.attr_mappings.each_key { |k| result[k] = convert_value(send(k)) }
+        result
+      end
+
+      private
+      def convert_value(val)
+        if val.respond_to? :to_hash
+          val.to_hash
+        elsif val.is_a?(Array)
+          val.map { |it| convert_value(it) }
+        else
+          val
+        end
+      end
+
       module ClassMethods
 
         def map_data(name, type=String, opts = {})
           attr_accessor name
           opts[:type] = type
-          @@data_mappings ||= {}
-          @@data_mappings[self] ||= {}
-          @@data_mappings[self][name] = opts
+          @data_mappings ||= {}
+          @data_mappings[name] = opts
+        end
+
+        def attr_mappings
+          if self.superclass.respond_to? :attr_mappings
+            parent_mappings = self.superclass.attr_mappings
+          end
+          @data_mappings.reverse_merge(parent_mappings || {})
         end
 
         # Parses composed domain type from hash response structure.
@@ -33,8 +56,8 @@ module KOSapiClient
           if self.superclass.respond_to? :set_mapped_attributes
             self.superclass.set_mapped_attributes(instance, source_hash)
           end
-          raise "Missing data mappings for entity #{self}" unless @@data_mappings[self]
-          @@data_mappings[self].each do |name, options|
+          raise "Missing data mappings for entity #{self}" unless @data_mappings
+          @data_mappings.each do |name, options|
             set_mapped_attribute(instance, name, source_hash, options)
           end
         end
