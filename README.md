@@ -4,7 +4,7 @@
 [![Dependency Status](http://img.shields.io/gemnasium/flexik/kosapi_client.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/flexik/kosapi_client.svg)][codeclimate]
 [![Coverage Status](https://img.shields.io/codeclimate/coverage/github/flexik/kosapi_client.svg)][codeclimate]
-[![Inline docs](http://inch-pages.github.io/github/flexik/kosapi_client.svg)](http://inch-pages.github.io/github/flexik/kosapi_client)
+[![Inline docs](http://inch-ci.org/github/flexik/kosapi_client.svg)](http://inch-ci.org/github/flexik/kosapi_client)
 
 [travis]: http://travis-ci.org/flexik/kosapi_client
 [gemnasium]: https://gemnasium.com/flexik/kosapi_client
