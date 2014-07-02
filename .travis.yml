@@ -3,7 +3,8 @@ rvm:
 - 1.9.3
 - 2.0.0
 - 2.1.1
-- jruby-19mode
+- 2.1.2
+#- jruby-19mode
 env:
   global:
   - secure: Cw2fNGLbO58H8Z7VJ75LeC7+MEJ7SREexN7n311PITb6NVY2lv0w6WjOSEc4VY/DgGZ1n5SR/ra+oSXOYKc4XeQstNrcs3h6y8VKAegqbdEEC2pbM5k8lH7GhOJejmSVNOfo25g7fwXQuIjttbHEfPYhpK9tYqdIwpGt1dOCh8c=
