@@ -21,14 +21,14 @@ module KOSapiClient
 
     private
     def is_paginated?
-      contents[:feed]
+      contents[:atom_feed]
     end
 
     def items
       if is_paginated?
-        contents[:feed][:entry]
+        contents[:atom_feed][:atom_entry]
       else
-        [contents[:entry]]
+        [contents[:atom_entry]]
       end
     end
 

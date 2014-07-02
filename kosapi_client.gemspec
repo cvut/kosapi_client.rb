@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'escape_utils' unless RUBY_PLATFORM == 'java' # used for uri_template
   spec.add_runtime_dependency 'uri_template'
+  spec.add_runtime_dependency 'ox' # required for correct XML namespace handling (MultiXML, oauth2)
 end

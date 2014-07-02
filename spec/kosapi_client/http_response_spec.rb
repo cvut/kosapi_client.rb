@@ -12,7 +12,7 @@ describe KOSapiClient::HTTPResponse do
 
     context 'with multiple items' do
 
-      let(:preprocessed_hash) { {feed: {entry: [foo: 1]}} }
+      let(:preprocessed_hash) { {atom_feed: {atom_entry: [foo: 1]}} }
 
       it 'converts items with converter' do
         expect(converter).to receive(:convert_paginated).and_return(:foo)
@@ -23,7 +23,7 @@ describe KOSapiClient::HTTPResponse do
 
     context 'with single item' do
 
-      let(:preprocessed_hash) { {entry: [foo: 1]} }
+      let(:preprocessed_hash) { {atom_entry: [foo: 1]} }
 
       it 'converts single item with converter' do
         expect(converter).to receive(:convert_single).and_return(:foo)

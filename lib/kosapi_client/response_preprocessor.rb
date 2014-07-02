@@ -15,19 +15,19 @@ module KOSapiClient
     end
 
     def entries_to_array(hash)
-      if hash[:feed] && hash[:feed][:entry].instance_of?(Hash)
-        hash[:feed][:entry] = [hash[:feed][:entry]]
+      if hash[:atom_feed] && hash[:atom_feed][:atom_entry].instance_of?(Hash)
+        hash[:atom_feed][:atom_entry] = [hash[:atom_feed][:atom_entry]]
       end
     end
 
     def merge_contents(hash)
-      entries = if hash[:feed]
-        hash[:feed][:entry]
+      entries = if hash[:atom_feed]
+        hash[:atom_feed][:atom_entry]
       else
-        [hash[:entry]]
+        [hash[:atom_entry]]
       end
       entries.each do |entry|
-        content = entry.delete(:content)
+        content = entry.delete(:atom_content)
         entry.merge! content if content
       end
 
