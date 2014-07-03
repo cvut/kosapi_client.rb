@@ -15,5 +15,10 @@ describe 'Courses resource', :vcr do
     expect(page.items.last.description).not_to be_nil
   end
 
+  it 'parses entry title' do
+    page = client.courses
+    expect(page.items.first.title).not_to be_nil
+  end
+
 
 end
