@@ -9,7 +9,7 @@ module KOSapiClient
       end
 
       def self.parse(contents)
-        new(contents[:name])
+        new(contents[:atom_name])
       end
     end
   end

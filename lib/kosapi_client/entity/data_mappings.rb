@@ -43,7 +43,7 @@ module KOSapiClient
         #
         # @param [Hash] content hash structure from API response corresponding to single domain object
         # @return [BaseEntity] parsed domain object
-        def parse(content)
+        def parse(content, context = {})
           instance = new()
           set_mapped_attributes(instance, content)
           instance
@@ -64,7 +64,13 @@ module KOSapiClient
 
         private
         def set_mapped_attribute(instance, name, source_hash, mapping_options)
-          value = source_hash[name]
+          namespace = mapping_options[:namespace]
+          if namespace
+            key = "#{namespace}_#{name}".to_sym
+          else
+            key = name
+          end
+          value = source_hash[key]
           if value.nil?
             raise "Missing value for attribute #{name}" if mapping_options[:required]
             return

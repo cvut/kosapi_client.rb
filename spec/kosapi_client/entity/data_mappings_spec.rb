@@ -57,6 +57,13 @@ describe KOSapiClient::Entity::DataMappings do
       expect{ dummy_class.parse({foo: 'bar'}) }.to raise_error(RuntimeError)
     end
 
+    it 'accepts context hash' do
+      dummy_class.map_data :foo, KOSapiClient::Entity::Enum
+      context = {}
+      parsed = dummy_class.parse({foo: 'bar'}, context)
+      expect(parsed.foo).to eq :bar
+    end
+
   end
 
   describe '.map_data' do
@@ -74,6 +81,13 @@ describe KOSapiClient::Entity::DataMappings do
       instance = dummy_class.parse({foo: '123', bar: '456'})
       expect(instance).to respond_to(:foo)
       expect(instance).not_to respond_to(:bar)
+    end
+
+
+    it 'supports namespace configuration' do
+      dummy_class.map_data :foo, String, namespace: :bar
+      instance = dummy_class.parse({bar_foo: '123', bar: '456'})
+      expect(instance.foo).to eq '123'
     end
 
   end

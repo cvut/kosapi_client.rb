@@ -4,11 +4,11 @@ module KOSapiClient
 
       include DataMappings
 
-      map_data :id
-      map_data :title
-      map_data :updated, Time
-      map_data :link, Link
-      map_data :author, Author
+      map_data :id, String, namespace: :atom
+      map_data :title, String, namespace: :atom
+      map_data :updated, Time, namespace: :atom
+      map_data :link, Link, namespace: :atom
+      map_data :author, Author, namespace: :atom
 
     end
   end
