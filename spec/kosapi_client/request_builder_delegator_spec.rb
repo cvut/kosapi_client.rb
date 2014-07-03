@@ -4,6 +4,7 @@ describe KOSapiClient::RequestBuilderDelegator do
 
   let(:response) { double(:response) }
   let(:builder) { double(:builder, response: response, finalize: nil) }
+  let(:block) { -> { 1 + 1 } }
   subject(:delegator) { KOSapiClient::RequestBuilderDelegator.new(builder) }
 
   describe '#method_missing' do
@@ -33,6 +34,22 @@ describe KOSapiClient::RequestBuilderDelegator do
     it 'replaces builder.self with self' do
       allow(builder).to receive(:foo).and_return(builder)
       expect(delegator.foo).to be delegator
+    end
+
+    it 'delegates call with block to builder' do
+      allow(builder).to receive(:foo).with(:x) do |arg, &block|
+        expect(block).not_to be_nil
+      end
+
+      delegator.foo(:x, &block)
+    end
+
+    it 'delegates call with block to response' do
+      allow(response).to receive(:foo).with(:x) do |arg, &block|
+        expect(block).not_to be_nil
+      end
+
+      delegator.foo(:x, &block)
     end
 
   end

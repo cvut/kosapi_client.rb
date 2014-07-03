@@ -8,11 +8,11 @@ module KOSapiClient
 
     alias :super_method_missing :method_missing
 
-    def method_missing(method, *args)
+    def method_missing(method, *args, &block)
       if @response
-        delegate_to_response(method, *args)
+        delegate_to_response(method, *args, &block)
       else
-        delegate_to_builder(method, *args)
+        delegate_to_builder(method, *args, &block)
       end
     end
 
@@ -25,17 +25,17 @@ module KOSapiClient
     end
 
     private
-    def delegate_to_response(method, *args)
+    def delegate_to_response(method, *args, &block)
       if @response.respond_to?(method)
-        @response.send(method, *args)
+        @response.send(method, *args, &block)
       else
         super_method_missing(method, *args)
       end
     end
 
-    def delegate_to_builder(method, *args)
+    def delegate_to_builder(method, *args, &block)
       if @request_builder.respond_to?(method)
-        res = @request_builder.send(method, *args)
+        res = @request_builder.send(method, *args, &block)
         if res.equal?(@request_builder)
           self
         else
@@ -44,7 +44,7 @@ module KOSapiClient
       else
         @request_builder.finalize
         @response = @request_builder.response
-        delegate_to_response(method, *args)
+        delegate_to_response(method, *args, &block)
       end
     end
 
