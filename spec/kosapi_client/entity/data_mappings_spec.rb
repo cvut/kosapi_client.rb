@@ -96,6 +96,12 @@ describe KOSapiClient::Entity::DataMappings do
       expect(instance.foo).to eq '123'
     end
 
+    it 'supports source element name configuration' do
+      dummy_class.map_data :foo, String, element: :bar
+      instance = dummy_class.parse({bar: '123'})
+      expect(instance.foo).to eq '123'
+    end
+
   end
 
   describe '#to_hash' do

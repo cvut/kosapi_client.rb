@@ -65,10 +65,11 @@ module KOSapiClient
         private
         def set_mapped_attribute(instance, name, source_hash, mapping_options)
           namespace = mapping_options[:namespace]
+          src_element = mapping_options[:element] || name
           if namespace
-            key = "#{namespace}_#{name}".to_sym
+            key = "#{namespace}_#{src_element}".to_sym
           else
-            key = name
+            key = src_element
           end
           value = source_hash[key]
           if value.nil?
