@@ -6,12 +6,12 @@ describe 'Courses resource', :vcr do
 
 
   it 'downloads courses data' do
-    page = client.courses.offset(0).limit(50).query(department: '18*')
-    expect(page.items.count).to eq 50
+    page = client.courses.offset(0).limit(15).query(department: '18*')
+    expect(page.items.count).to eq 15
   end
 
   it 'provides courses data details' do
-    page = client.courses.offset(0).limit(50).query(department: '18*').detail
+    page = client.courses.offset(20).query(department: '18*').detail
     expect(page.items.last.description).not_to be_nil
   end
 
