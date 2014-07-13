@@ -35,6 +35,12 @@ describe KOSapiClient::Entity::DataMappings do
       expect(parsed.foo).to eq [5, 7, 11]
     end
 
+    it 'parses single item as array when set' do
+      dummy_class.map_data :foo, [Integer]
+      parsed = dummy_class.parse({foo: '11'})
+      expect(parsed.foo).to eq [11]
+    end
+
     it 'parses custom types' do
       dummy_class.map_data :foo, KOSapiClient::Entity::Enum
       parsed = dummy_class.parse({foo: 'bar'})

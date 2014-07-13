@@ -96,7 +96,7 @@ module KOSapiClient
           if values.is_a?(Array)
             values.map { |it| convert_type(it, type) }
           else
-            convert_type(values, type)
+            [ convert_type(values, type) ]
           end
         end
 
