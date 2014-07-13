@@ -3,7 +3,7 @@ require 'spec_helper'
 describe KOSapiClient::HTTPResponse do
   let(:parsed_result) { {id: 'urn:cvut:kos:courseevent:220200484405'} }
   let(:result) { double(parsed: parsed_result) }
-
+  let(:preprocessed_hash) { {} }
   let(:preprocessor) { instance_double(KOSapiClient::ResponsePreprocessor, preprocess: preprocessed_hash) }
   let(:converter) { instance_double(KOSapiClient::ResponseConverter) }
   subject(:response) { KOSapiClient::HTTPResponse.new(result, preprocessor, converter) }
@@ -31,6 +31,17 @@ describe KOSapiClient::HTTPResponse do
       end
 
     end
+
+    context 'with invalid response' do
+
+      let(:parsed_result) { 'foo' }
+
+      it 'raises error when parsed type is not a hash' do
+        expect { response.convert }.to raise_error(RuntimeError)
+      end
+
+    end
+
 
   end
 

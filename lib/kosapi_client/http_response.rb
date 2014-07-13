@@ -7,11 +7,14 @@ module KOSapiClient
 
     def initialize(result, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new)
       @result = result
-      @contents = preprocessor.preprocess(result.parsed)
+      @preprocessor = preprocessor
       @converter = converter
     end
 
     def convert
+      parsed_contents = @result.parsed
+      raise 'Wrong type of parsed response. HTTP response body is probably invalid or incomplete.' unless parsed_contents.instance_of?(Hash)
+      @contents = @preprocessor.preprocess(parsed_contents)
       if is_paginated?
         @converter.convert_paginated(items)
       else
