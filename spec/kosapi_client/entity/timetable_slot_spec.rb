@@ -7,7 +7,8 @@ describe KOSapiClient::Entity::TimetableSlot do
   describe '.parse' do
 
     it 'can be parsed from a hash' do
-      slot = TimetableSlot.parse({day: :monday, parity: :odd, room: 'A:1324'})
+      slot = TimetableSlot.parse({id: 42, day: :monday, parity: :odd, room: 'A:1324'})
+      expect(slot.id).to eq 42
       expect(slot.day).to eq :monday
       expect(slot.parity).to eq :odd
       expect(slot.room).to eq 'A:1324'

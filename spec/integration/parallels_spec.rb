@@ -43,4 +43,10 @@ describe 'Parallels resource', :vcr do
     expect(parallel.link.rel).not_to be_nil
   end
 
+  it 'parses timetable slot ID' do
+    page = client.parallels
+    slot = page.items.first.timetable_slots.first
+    expect(slot.id).not_to be_nil
+  end
+
 end
