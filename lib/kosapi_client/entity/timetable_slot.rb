@@ -2,19 +2,14 @@ module KOSapiClient
   module Entity
     class TimetableSlot
 
-      attr_reader :id, :day, :parity, :room
+      include DataMappings
 
-      def initialize(id, day, parity, room)
-        @id = id
-        @day = day
-        @parity = parity
-        @room = room
-      end
-
-      def self.parse(contents)
-        new(contents[:id], contents[:day], contents[:parity], contents[:room])
-      end
-
+      map_data :id, Integer
+      map_data :day, Integer
+      map_data :duration, Integer
+      map_data :first_hour, Integer
+      map_data :parity, Enum
+      map_data :room, Link
 
     end
   end
