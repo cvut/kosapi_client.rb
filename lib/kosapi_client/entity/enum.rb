@@ -3,7 +3,7 @@ module KOSapiClient
     class Enum
 
       def self.parse(contents)
-        contents.to_sym
+        contents.downcase.to_sym
       end
 
     end
