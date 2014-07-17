@@ -14,6 +14,11 @@ module KOSapiClient
         href = contents[:xlink_href] || contents[:href]
         new(contents[:__content__], href, contents[:rel])
       end
+
+      def id
+        @href.split('/').last
+      end
+
     end
   end
 end
