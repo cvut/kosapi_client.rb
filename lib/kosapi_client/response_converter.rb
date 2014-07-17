@@ -13,6 +13,7 @@ module KOSapiClient
     # @return [ResultPage] ResultPage of domain objects
 
     def convert_paginated(items)
+      items ||= []
       converted_items = items.map{ |p| convert_type(p, detect_type(p)) }
       Entity::ResultPage.new(converted_items, 0, nil)
     end

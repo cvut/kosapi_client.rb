@@ -20,5 +20,10 @@ describe 'Courses resource', :vcr do
     expect(page.items.first.title).not_to be_nil
   end
 
+  it 'parses empty response' do
+    page = client.courses.offset(1000000)
+    expect(page.items).to eq []
+  end
+
 
 end

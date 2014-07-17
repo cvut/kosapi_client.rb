@@ -31,4 +31,10 @@ describe KOSapiClient::ResponsePreprocessor do
     expect(result).to eq({atom_entry: {id: '1234', foo: :bar}})
   end
 
+  it 'handles empty response' do
+    resp = {atom_feed: {} }
+    result = preprocessor.preprocess(resp)
+    expect(result).to eq({atom_feed: {}})
+  end
+
 end

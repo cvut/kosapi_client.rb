@@ -26,9 +26,11 @@ module KOSapiClient
       else
         [hash[:atom_entry]]
       end
-      entries.each do |entry|
-        content = entry.delete(:atom_content)
-        entry.merge! content if content
+      if entries
+        entries.each do |entry|
+          content = entry.delete(:atom_content)
+          entry.merge! content if content
+        end
       end
 
     end
