@@ -74,10 +74,15 @@ module KOSapiClient
           value = source_hash[key]
           if value.nil?
             raise "Missing value for attribute #{name}" if mapping_options[:required]
-            return
+            if mapping_options[:type].is_a?(Array)
+              value = []
+            else
+              return
+            end
+          else
+            value = convert_type(value, mapping_options[:type])
           end
-          value = convert_type(value, mapping_options[:type])
-          instance.send("#{name}=".to_sym, value)
+            instance.send("#{name}=".to_sym, value)
         end
 
         def convert_type(value, type)

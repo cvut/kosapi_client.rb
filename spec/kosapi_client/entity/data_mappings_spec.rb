@@ -70,6 +70,12 @@ describe KOSapiClient::Entity::DataMappings do
       expect(parsed.foo).to eq :bar
     end
 
+    it 'parses nil collection as empty array' do
+      dummy_class.map_data :foo, [Integer]
+      parsed = dummy_class.parse({ })
+      expect(parsed.foo).to eq []
+    end
+
   end
 
   describe '.map_data' do
