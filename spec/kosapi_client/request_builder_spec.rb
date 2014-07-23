@@ -66,7 +66,12 @@ describe KOSapiClient::RequestBuilder do
     end
 
     it 'throws error when params are empty' do
-      expect { builder.query() }.to raise_error(RuntimeError)
+      expect { builder.query({}) }.to raise_error(RuntimeError)
+    end
+
+    it 'accepts string instead of a hash' do
+      expect(url_builder).to receive(:set_query_param).with(:query, 'foo==10;bar==20')
+      builder.query('foo==10;bar==20')
     end
 
   end

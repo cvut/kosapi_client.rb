@@ -21,7 +21,11 @@ module KOSapiClient
 
     def query(params = {})
       raise 'Empty parameters to query are not allowed' if params.empty?
-      rsql = params.map { |k, v| "#{k}==#{v}" }.join(';')
+      if params.instance_of?(String)
+        rsql = params
+      else
+        rsql = params.map { |k, v| "#{k}==#{v}" }.join(';')
+      end
       @url_builder.set_query_param(:query, rsql)
       self
     end
