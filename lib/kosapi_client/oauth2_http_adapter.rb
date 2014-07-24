@@ -18,8 +18,7 @@ module KOSapiClient
     end
 
     def send_request(verb, url, options = {})
-      result = token.request(verb, url, options)
-      KOSapiClient::KOSapiResponse.new(result)
+      token.request(verb, url, options)
     end
 
     private

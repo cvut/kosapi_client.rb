@@ -7,6 +7,14 @@ module KOSapiClient
 
   class ResponseConverter
 
+    def convert(response)
+      if response.is_paginated?
+        convert_paginated(response.items)
+      else
+        convert_single(response.item)
+      end
+    end
+
     # Returns processed entries converted into domain objects
     # wrapped into ResultPage class instance.
     # @param items [Array] Array of hashes corresponding to entries
