@@ -1,7 +1,5 @@
 module KOSapiClient
-  class HTTPResponse
-
-    include Enumerable
+  class KOSapiResponse
 
     attr_reader :contents
 

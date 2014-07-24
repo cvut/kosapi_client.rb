@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe KOSapiClient::HTTPClient do
 
-  let(:response) { instance_double(KOSapiClient::HTTPResponse, convert: nil) }
+  let(:response) { instance_double(KOSapiClient::KOSapiResponse, convert: nil) }
   let(:http_adapter) { instance_double(KOSapiClient::OAuth2HttpAdapter) }
   subject(:client) { KOSapiClient::HTTPClient.new(http_adapter) }
 
