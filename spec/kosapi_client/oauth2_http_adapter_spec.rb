@@ -5,19 +5,19 @@ describe KOSapiClient::OAuth2HttpAdapter, :vcr do
   subject(:client) { KOSapiClient::OAuth2HttpAdapter.new(credentials, KOSAPI_ROOT_URL) }
 
 
-  context 'invalid OAUTH credentials' do
+  context 'with invalid OAUTH credentials' do
     let(:credentials) { { client_id: 'invalid_client_id', client_secret: 'invalid_secret' } }
 
     it 'throws authentication error when fetching resource' do
-      expect { client.get('courses') }.to raise_error(OAuth2::Error)
+      expect { client.send_request(:get, 'courses') }.to raise_error(OAuth2::Error)
     end
   end
 
-  context 'valid OAUTH credentials' do
+  context 'with valid OAUTH credentials' do
     let(:credentials) { { client_id: ENV['KOSAPI_OAUTH_CLIENT_ID'], client_secret: ENV['KOSAPI_OAUTH_CLIENT_SECRET'] } }
 
     it 'fetches response from a REST resource' do
-      response = client.get('courses')
+      response = client.send_request(:get, 'courses')
       expect(response).not_to be_nil
     end
 

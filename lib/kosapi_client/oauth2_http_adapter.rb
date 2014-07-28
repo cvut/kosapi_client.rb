@@ -13,10 +13,6 @@ module KOSapiClient
       @client = OAuth2::Client.new(credentials[:client_id], credentials[:client_secret], site: root_url, authorize_url: auth_url, token_url: token_url)
     end
 
-    def get(url, options = {})
-      send_request(:get, url, options)
-    end
-
     def send_request(verb, url, options = {})
       token.request(verb, url, options)
     end
