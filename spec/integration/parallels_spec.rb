@@ -13,8 +13,8 @@ describe 'Parallels resource', :vcr do
   it 'parses relationship links properly' do
     page = client.parallels
     course = page.items.first.course
-    expect(course.title).not_to be_nil
-    expect(course.href).not_to be_nil
+    expect(course.link_title).not_to be_nil
+    expect(course.link_href).not_to be_nil
   end
 
   it 'parses entry ID properly' do
@@ -39,8 +39,8 @@ describe 'Parallels resource', :vcr do
     page = client.parallels
     parallel = page.items.first
     expect(parallel.link).not_to be_nil
-    expect(parallel.link.href).not_to be_nil
-    expect(parallel.link.rel).not_to be_nil
+    expect(parallel.link.link_href).not_to be_nil
+    expect(parallel.link.link_rel).not_to be_nil
   end
 
   it 'parses timetable slot ID' do

@@ -36,8 +36,8 @@ describe KOSapiClient::KOSapiResponse do
 
       it 'parses next link from feed' do
         link = response.next_link(client)
-        expect(link.href).to eq 'courses/?offset=20&limit=10'
-        expect(link.rel).to eq 'next'
+        expect(link.link_href).to eq 'courses/?offset=20&limit=10'
+        expect(link.link_rel).to eq 'next'
       end
 
       it 'injects http client' do
@@ -51,8 +51,8 @@ describe KOSapiClient::KOSapiResponse do
 
         it 'parses next link from feed' do
           link = response.next_link(client)
-          expect(link.href).to eq 'courses/?offset=10&limit=10'
-          expect(link.rel).to eq 'next'
+          expect(link.link_href).to eq 'courses/?offset=10&limit=10'
+          expect(link.link_rel).to eq 'next'
         end
       end
 

@@ -14,7 +14,7 @@ describe KOSapiClient::Entity::TimetableSlot do
       expect(slot.duration).to eq 2
       expect(slot.parity).to eq :both
       expect(slot.room).to be_an_instance_of(Link)
-      expect(slot.room.href).to eq 'rooms/10010205/'
+      expect(slot.room.link_href).to eq 'rooms/10010205/'
     end
 
   end

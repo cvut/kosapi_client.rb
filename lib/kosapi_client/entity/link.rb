@@ -2,12 +2,12 @@ module KOSapiClient
   module Entity
     class Link
 
-      attr_reader :title, :href, :rel
+      attr_reader :link_title, :link_href, :link_rel
 
       def initialize(title, href, rel, client = nil)
-        @title = title
-        @href = href
-        @rel = rel
+        @link_title = title
+        @link_href = href
+        @link_rel = rel
         @client = client
       end
 
@@ -16,13 +16,13 @@ module KOSapiClient
         new(contents[:__content__], href, contents[:rel])
       end
 
-      def id
-        @href.split('/').last
+      def link_id
+        @link_href.split('/').last
       end
 
       def follow
-        raise "HTTP client not set, cannot send request to #{href}" unless @client
-        @client.send_request(:get, href)
+        raise "HTTP client not set, cannot send request to #{link_href}" unless @client
+        @client.send_request(:get, link_href)
       end
 
       def inject_client(client)

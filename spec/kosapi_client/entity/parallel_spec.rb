@@ -12,7 +12,7 @@ describe KOSapiClient::Entity::Parallel do
     expect(parallel.code).to eq 42
     expect(parallel.capacity_overfill).to eq :denied
     expect(parallel.teachers.first).to be_an_instance_of KOSapiClient::Entity::Link
-    expect(parallel.teachers.first.href).to eq 'teachers/smitkdan/'
-    expect(parallel.teachers.first.title).to eq 'Ing. arch. Daniel Smitka Ph.D.'
+    expect(parallel.teachers.first.link_href).to eq 'teachers/smitkdan/'
+    expect(parallel.teachers.first.link_title).to eq 'Ing. arch. Daniel Smitka Ph.D.'
   end
 end
