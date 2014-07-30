@@ -7,9 +7,13 @@ module KOSapiClient
 
   class ResponseConverter
 
+    def initialize(client)
+      @client = client
+    end
+
     def convert(response)
       if response.is_paginated?
-        convert_paginated(response.items)
+        convert_paginated(response)
       else
         convert_single(response.item)
       end
@@ -17,13 +21,13 @@ module KOSapiClient
 
     # Returns processed entries converted into domain objects
     # wrapped into ResultPage class instance.
-    # @param items [Array] Array of hashes corresponding to entries
+    # @param response [KOSapiResponse] Response object wrapping array of hashes corresponding to entries
     # @return [ResultPage] ResultPage of domain objects
 
-    def convert_paginated(items)
-      items ||= []
+    def convert_paginated(response)
+      items = response.items || []
       converted_items = items.map{ |p| convert_type(p, detect_type(p)) }
-      Entity::ResultPage.new(converted_items, 0, nil)
+      Entity::ResultPage.new(converted_items, 0, response.next_link(@client))
     end
 
     def convert_single(item)

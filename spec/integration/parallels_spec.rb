@@ -49,4 +49,10 @@ describe 'Parallels resource', :vcr do
     expect(slot.id).not_to be_nil
   end
 
+  it 'returns following result page with next callback' do
+    page = client.parallels
+    following_page = page.next
+    expect(following_page.items.count).to be > 0
+  end
+
 end

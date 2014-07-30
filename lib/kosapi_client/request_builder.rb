@@ -32,7 +32,7 @@ module KOSapiClient
 
     alias where query
 
-    def initialize(resource_name, http_client, url_builder = URLBuilder.new("/#{resource_name.to_s}"))
+    def initialize(resource_name, http_client, url_builder = URLBuilder.new(resource_name.to_s))
       @base_url = resource_name
       @http_client = http_client
       @operation = :get

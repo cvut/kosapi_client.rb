@@ -1,7 +1,7 @@
 module KOSapiClient
   class HTTPClient
 
-    def initialize(http_adapter, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new)
+    def initialize(http_adapter, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new(self))
       @http_adapter = http_adapter
       @preprocessor = preprocessor
       @converter = converter
@@ -23,7 +23,7 @@ module KOSapiClient
       if is_absolute(url)
         url
       else
-        "#{@http_adapter.base_url}#{url}"
+        "#{@http_adapter.base_url}/#{url}"
       end
     end
 
