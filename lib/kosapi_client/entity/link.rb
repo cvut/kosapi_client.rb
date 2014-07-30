@@ -33,6 +33,10 @@ module KOSapiClient
         @target ||= follow
       end
 
+      def to_hash
+        { href: link_href, rel: link_rel, title: link_title }
+      end
+
       def method_missing(method, *args, &block)
         target.send(method, *args, &block)
       end

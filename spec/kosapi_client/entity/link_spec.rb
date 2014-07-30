@@ -69,4 +69,11 @@ describe KOSapiClient::Entity::Link do
     end
   end
 
+  describe '#to_hash' do
+    it 'converts link attributes to hash' do
+      expect(link.to_hash).to eq({href: 'http://example.com/foo/bar/42', title: 'Example Site', rel: 'next'})
+    end
+
+  end
+
 end
