@@ -24,4 +24,20 @@ describe KOSapiClient::Entity::Link do
 
   end
 
+  describe '#follow' do
+
+    let(:client) { instance_double(KOSapiClient::HTTPClient)}
+
+    it 'throws error when not http client set' do
+      expect { link.follow }.to raise_error(RuntimeError)
+    end
+
+    it 'calls http client with href' do
+      link.inject_client(client)
+      expect(client).to receive(:send_request).with(:get, 'http://example.com/foo/bar/42')
+      link.follow
+    end
+
+  end
+
 end
