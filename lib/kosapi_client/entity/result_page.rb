@@ -8,16 +8,12 @@ module KOSapiClient
 
       include Enumerable
 
-      attr_reader :items, :start_index
+      attr_reader :items, :start_index, :next
 
-      def initialize(items, start_index, next_callback = nil)
+      def initialize(items, start_index, next_link = nil)
         @items = items
         @start_index = start_index
-        @next_callback = next_callback
-      end
-
-      def next
-        @next_callback.call if(@next_callback)
+        @next = next_link
       end
 
       def count

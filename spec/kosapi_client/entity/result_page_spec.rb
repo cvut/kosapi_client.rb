@@ -27,13 +27,4 @@ describe KOSapiClient::Entity::ResultPage do
 
   end
 
-  describe '#next' do
-
-    it 'calls next callback when set' do
-      expect(called).to receive(:foo)
-      expect(result_page.next).to eq :bar
-    end
-
-  end
-
 end
