@@ -1,15 +1,15 @@
 module KOSapiClient
 
-  DEFAULT_KOSAPI_ROOT_URL = 'https://kosapi.fit.cvut.cz/api/3/'
+  DEFAULT_KOSAPI_BASE_URL = 'https://kosapi.fit.cvut.cz/api/3'
 
   singleton_class.class_eval do
 
     attr_reader :client
 
-    def new(credentials, root_url = DEFAULT_KOSAPI_ROOT_URL)
-      http_adapter = OAuth2HttpAdapter.new(credentials, root_url)
+    def new(credentials, base_url = DEFAULT_KOSAPI_BASE_URL)
+      http_adapter = OAuth2HttpAdapter.new(credentials, base_url)
       http_client = HTTPClient.new(http_adapter)
-      ApiClient.new(http_client, root_url)
+      ApiClient.new(http_client, base_url)
     end
 
     def configure

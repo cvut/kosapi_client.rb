@@ -13,15 +13,15 @@ module KOSapiClient
     ##
     # Creates a new KOSapi client.
     #
-    def initialize(http_client, root_url = DEFAULT_KOSAPI_ROOT_URL)
+    def initialize(http_client, base_url = DEFAULT_KOSAPI_BASE_URL)
       @http_client = http_client
-      @root_url = root_url
+      @base_url = base_url
     end
 
     def create_builder(resource_name)
       builder_name = "#{resource_name}_builder".camelize.to_sym
       builder_class = find_builder_class(builder_name)
-      builder_class.new(@root_url + resource_name.to_s, @http_client)
+      builder_class.new(resource_name.to_s, @http_client)
     end
 
     private

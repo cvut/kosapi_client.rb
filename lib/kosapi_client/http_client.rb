@@ -8,7 +8,8 @@ module KOSapiClient
     end
 
     def send_request(verb, url, options = {})
-      result = @http_adapter.send_request(verb, url, options)
+      absolute_url = get_absolute_url(url)
+      result = @http_adapter.send_request(verb, absolute_url, options)
       process_response(result)
     end
 
@@ -16,6 +17,19 @@ module KOSapiClient
       preprocessed = @preprocessor.preprocess(result)
       response = KOSapiClient::KOSapiResponse.new(preprocessed)
       @converter.convert(response)
+    end
+
+    def get_absolute_url(url)
+      if is_absolute(url)
+        url
+      else
+        "#{@http_adapter.base_url}#{url}"
+      end
+    end
+
+    private
+    def is_absolute(url)
+      url.start_with?('http')
     end
 
   end

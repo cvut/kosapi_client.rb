@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe KOSapiClient::URLBuilder do
 
-  subject(:builder) { KOSapiClient::URLBuilder.new('http://example.com') }
+  let(:root) { 'http://example.com' }
+  subject(:builder) { KOSapiClient::URLBuilder.new(root) }
 
   describe '#set_query_param' do
 
@@ -25,6 +26,17 @@ describe KOSapiClient::URLBuilder do
     it 'sets path correctly' do
       builder.set_path('foo', 'bar')
       expect(builder.url).to eq 'http://example.com/foo/bar'
+    end
+
+    context 'with custom root' do
+
+      let(:root) { 'https://kosapi.fit.cvut.cz/api/3' }
+
+      it 'creates correct path' do
+        builder.set_path('bar')
+        expect(builder.url).to eq 'https://kosapi.fit.cvut.cz/api/3/bar'
+      end
+
     end
 
   end
