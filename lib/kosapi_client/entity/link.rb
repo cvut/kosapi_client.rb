@@ -11,7 +11,7 @@ module KOSapiClient
         @client = client
       end
 
-      def self.parse(contents, context = {})
+      def self.parse(contents)
         href = contents[:xlink_href] || contents[:href]
         new(contents[:__content__], href, contents[:rel])
       end
@@ -27,6 +27,18 @@ module KOSapiClient
 
       def inject_client(client)
         @client = client
+      end
+
+      def target
+        @target ||= follow
+      end
+
+      def method_missing(method, *args, &block)
+        target.send(method, *args, &block)
+      end
+
+      def respond_to_missing?(method_name, include_private = false)
+        target.respond_to?(method_name, include_private)
       end
 
     end
