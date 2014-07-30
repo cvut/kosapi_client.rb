@@ -1,4 +1,5 @@
 require 'kosapi_client/entity/link'
+require 'kosapi_client/entity/id'
 require 'kosapi_client/entity/author'
 require 'kosapi_client/entity/enum'
 require 'kosapi_client/entity/ml_string'
