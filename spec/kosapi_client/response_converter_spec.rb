@@ -10,7 +10,11 @@ describe KOSapiClient::ResponseConverter do
     context 'with paginated response' do
 
       let(:next_link) { instance_double(KOSapiClient::Entity::Link) }
-      let(:api_response) { double(is_paginated?: true, items: [{xsi_type: 'courseEvent', capacity: 70}, {xsi_type: 'courseEvent', capacity: 40}], next_link: next_link) }
+      let(:prev_link) { instance_double(KOSapiClient::Entity::Link) }
+      let(:links) { instance_double(KOSapiClient::ResponseLinks, next: next_link, prev: prev_link) }
+      let(:api_response) { double(is_paginated?: true, items: [{xsi_type: 'courseEvent', capacity: 70}, {xsi_type: 'courseEvent', capacity: 40}], links_hash: links) }
+
+      before(:each) { allow(converter).to receive(:create_links).and_return(links) }
 
       it 'processes paginated response' do
         result = converter.convert(api_response)
@@ -22,7 +26,10 @@ describe KOSapiClient::ResponseConverter do
         expect(result.next).to be next_link
       end
 
-
+      it 'creates prev link' do
+        result = converter.convert(api_response)
+        expect(result.prev).to be prev_link
+      end
     end
 
     context 'with single entry response' do

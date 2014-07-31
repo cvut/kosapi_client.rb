@@ -8,20 +8,35 @@ module KOSapiClient
 
       include Enumerable
 
-      attr_reader :items, :start_index, :next
+      attr_reader :items
 
-      def initialize(items, start_index, next_link = nil)
+      def initialize(items, links, auto_paginate = true)
         @items = items
-        @start_index = start_index
-        @next = next_link
+        @links = links
+        @auto_paginate = auto_paginate
       end
 
       def count
         @items.count
       end
 
+      def next
+        @links.next
+      end
+
+      def prev
+        @links.prev
+      end
+
       def each(&block)
-        @items.each(&block)
+        items.each(&block)
+        return unless @auto_paginate
+        next_link = self.next
+        while next_link
+          next_page = next_link.follow
+          next_link = next_page.next
+          next_page.items.each(&block)
+        end
       end
 
     end
