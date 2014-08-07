@@ -1,14 +1,14 @@
 # KOSapi Client
 
-[![Build Status](http://img.shields.io/travis/flexik/kosapi_client.svg)][travis]
+[![Build Status](http://img.shields.io/travis/cvut/kosapi_client.rb.svg)][travis]
 [![Dependency Status](http://img.shields.io/gemnasium/flexik/kosapi_client.svg)][gemnasium]
-[![Code Climate](http://img.shields.io/codeclimate/github/flexik/kosapi_client.svg)][codeclimate]
-[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/flexik/kosapi_client.svg)][codeclimate]
-[![Inline docs](http://inch-ci.org/github/flexik/kosapi_client.svg)](http://inch-ci.org/github/flexik/kosapi_client)
+[![Code Climate](http://img.shields.io/codeclimate/github/cvut/kosapi_client.rb.svg)][codeclimate]
+[![Coverage Status](https://img.shields.io/codeclimate/coverage/github/cvut/kosapi_client.rb.svg)][codeclimate]
+[![Inline docs](http://inch-ci.org/github/cvut/kosapi_client.rb.svg)](http://inch-ci.org/github/cvut/kosapi_client.rb)
 
-[travis]: http://travis-ci.org/flexik/kosapi_client
+[travis]: http://travis-ci.org/cvut/kosapi_client.rb
 [gemnasium]: https://gemnasium.com/flexik/kosapi_client
-[codeclimate]: https://codeclimate.com/github/flexik/kosapi_client
+[codeclimate]: https://codeclimate.com/github/cvut/kosapi_client.rb
 
 A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvut.cz).
 
