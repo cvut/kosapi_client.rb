@@ -55,4 +55,9 @@ describe 'Parallels resource', :vcr, :integration do
     expect(following_page.items.count).to be > 0
   end
 
+  it 'follows next link with RSQL query' do
+    page = client.parallels.where('(lastUpdatedDate>=2014-07-01T00:00:00;lastUpdatedDate<=2014-07-10T00:00:00)')
+    expect(page.next.items.count).to be > 0
+  end
+
 end
