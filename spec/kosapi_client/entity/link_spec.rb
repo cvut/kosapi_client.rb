@@ -19,7 +19,17 @@ describe KOSapiClient::Entity::Link do
 
   end
 
-  describe '#id' do
+  describe '#initialize' do
+
+    it 'encodes href URL' do
+      href = 'parallels?query=(lastUpdatedDate%3E=2014-07-01T00:00:00;lastUpdatedDate%3C=2014-07-10T00:00:00)&offset=10&limit=10'
+      link = Link.new(nil, href, nil)
+      expect(link.link_href).to eq 'parallels?query=(lastUpdatedDate%3E=2014-07-01T00:00:00%3BlastUpdatedDate%3C=2014-07-10T00:00:00)&offset=10&limit=10'
+    end
+
+  end
+
+  describe '#link_id' do
 
     it 'returns last href segment' do
       expect(link.link_id).to eq '42'

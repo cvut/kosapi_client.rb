@@ -6,7 +6,7 @@ module KOSapiClient
 
       def initialize(title, href, rel, client = nil)
         @link_title = title
-        @link_href = href
+        @link_href = escape_url(href)
         @link_rel = rel
         @client = client
       end
@@ -43,6 +43,10 @@ module KOSapiClient
 
       def respond_to_missing?(method_name, include_private = false)
         target.respond_to?(method_name, include_private)
+      end
+
+      def escape_url(url)
+        url.gsub(';','%3B')
       end
 
     end
