@@ -9,6 +9,7 @@ module KOSapiClient
       include Enumerable
 
       attr_reader :items
+      attr_accessor :auto_paginate
 
       def initialize(items, links, auto_paginate = true)
         @items = items
