@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Courses resource', :vcr do
+describe 'Courses resource', :vcr, :integration do
   let(:credentials) { { client_id: ENV['KOSAPI_OAUTH_CLIENT_ID'], client_secret: ENV['KOSAPI_OAUTH_CLIENT_SECRET'] } }
   subject(:client) {  KOSapiClient.new(credentials) }
 
@@ -24,6 +24,5 @@ describe 'Courses resource', :vcr do
     page = client.courses.offset(1000000)
     expect(page.items).to eq []
   end
-
 
 end
