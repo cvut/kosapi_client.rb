@@ -1,13 +1,13 @@
 # KOSapi Client
 
 [![Build Status](http://img.shields.io/travis/cvut/kosapi_client.rb.svg)][travis]
-[![Dependency Status](http://img.shields.io/gemnasium/flexik/kosapi_client.svg)][gemnasium]
+[![Dependency Status](http://img.shields.io/gemnasium/cvut/kosapi_client.rb.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/cvut/kosapi_client.rb.svg)][codeclimate]
 [![Coverage Status](https://img.shields.io/coveralls/cvut/kosapi_client.rb.svg)][coveralls]
 [![Inline docs](http://inch-ci.org/github/cvut/kosapi_client.rb.svg)](http://inch-ci.org/github/cvut/kosapi_client.rb)
 
 [travis]: http://travis-ci.org/cvut/kosapi_client.rb
-[gemnasium]: https://gemnasium.com/flexik/kosapi_client
+[gemnasium]: https://gemnasium.com/cvut/kosapi_client.rb
 [codeclimate]: https://codeclimate.com/github/cvut/kosapi_client.rb
 [coveralls]: https://coveralls.io/r/cvut/kosapi_client.rb
 
