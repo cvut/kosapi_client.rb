@@ -4,10 +4,14 @@ module KOSapiClient
 
       def related
         raise 'Call #find before asking for related parallels' unless id_set?
+        url_builder.set_path(id, 'related')
+        self
       end
 
       def students
-
+        raise 'Call #find before asking for related parallels' unless id_set?
+        url_builder.set_path(id, 'students')
+        self
       end
 
     end
