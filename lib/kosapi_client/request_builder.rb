@@ -4,8 +4,8 @@ module KOSapiClient
     attr_reader :response
 
     def find(id)
+      @id = id
       @url_builder.set_path(id)
-      @id_set = true
       self
     end
 
@@ -39,6 +39,7 @@ module KOSapiClient
       @body = nil
       @headers = {}
       @url_builder = url_builder
+      @id = nil
     end
 
     def finalize
@@ -47,8 +48,10 @@ module KOSapiClient
     end
 
     private
+    attr_reader :url_builder, :id
+
     def id_set?
-      @id_set
+      @id
     end
 
   end
