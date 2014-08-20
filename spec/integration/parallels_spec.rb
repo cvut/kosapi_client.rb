@@ -60,4 +60,9 @@ describe 'Parallels resource', :vcr, :integration do
     expect(page.next.items.count).to be > 0
   end
 
+  it 'returns students for a parallel' do
+    students = client.parallels.find(339540000).students.limit(20)
+    expect(students.count).to eq 15
+  end
+
 end
