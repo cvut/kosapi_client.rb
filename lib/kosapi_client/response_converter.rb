@@ -47,7 +47,12 @@ module KOSapiClient
 
     def extract_type(type_str)
       type_name = type_str.camelize
-      Entity.const_get(type_name)
+      begin
+        entity_type = Entity.const_get(type_name)
+      rescue
+        raise "Unknown entity type: #{type_name}"
+      end
+      entity_type
     end
 
     def create_links(response)

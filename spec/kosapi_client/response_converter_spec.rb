@@ -43,8 +43,16 @@ describe KOSapiClient::ResponseConverter do
 
     end
 
+    context 'unknown type' do
+
+      let(:api_response) { double(is_paginated?: false, item: {xsi_type: 'unknownType'}) }
+
+      it 'raises error when type not found' do
+        expect { converter.convert(api_response) }.to raise_error(RuntimeError)
+      end
+
+    end
+
   end
-
-
 
 end
