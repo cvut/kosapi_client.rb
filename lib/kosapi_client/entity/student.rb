@@ -2,8 +2,6 @@ module KOSapiClient
   module Entity
     class Student < BaseEntity
 
-      include DataMappings
-
       map_data :branch, Link
       map_data :department , Link
       map_data :email
