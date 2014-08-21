@@ -1,3 +1,4 @@
+require 'kosapi_client/entity/boolean'
 require 'kosapi_client/entity/link'
 require 'kosapi_client/entity/id'
 require 'kosapi_client/entity/author'
