@@ -26,7 +26,7 @@ module KOSapiClient
 
     def convert_paginated(response)
       items = response.items || []
-      converted_items = items.map{ |p| convert_type(p, detect_type(p)) }
+      converted_items = items.map{ |p| convert_single(p) }
       Entity::ResultPage.new(converted_items, create_links(response))
     end
 
