@@ -3,7 +3,7 @@ module KOSapiClient
     class ExamsBuilder < RequestBuilder
 
       def attendees
-        raise 'Call #find before asking for related parallels' unless id_set?
+        raise 'Call #find({exam_id}) before asking for attendees' unless id_set?
         url_builder.set_path(id, 'attendees')
         self
       end
