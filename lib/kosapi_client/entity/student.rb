@@ -3,7 +3,7 @@ module KOSapiClient
     class Student < BasePerson
 
       map_data :branch, Link
-      map_data :department , Link
+      map_data :department, Link
       map_data :email
       map_data :start_date, Time
       map_data :faculty, Link
