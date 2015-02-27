@@ -9,7 +9,7 @@ describe KOSapiClient::Entity::CourseEvent do
                                 course: {__content__: 'Computer Structure  and Architecture',
                                          xlink_href: 'courses/BI-SAP/'},
                                 end_date: '2010-05-18T14:01:00',
-                                name: {__content__: 'test1 oprava', lang: 'cs'},
+                                name: {__content__: 'test1 oprava', xml_lang: 'cs'},
                                 occupied: '50',
                                 room: {__content__: 'TK:PU1', xlink_href: 'rooms/TK:PU1/'},
                                 semester: {__content__: 'Summer 2009/2010', xlink_href: 'semesters/B092/'},
