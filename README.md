@@ -63,7 +63,7 @@ end
 KOSapiClient.parallels.find(42)
 ```
 
-## How to extent API functionality
+## How to extend API functionality
 
 ### Add entity
 
