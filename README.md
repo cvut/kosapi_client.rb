@@ -17,7 +17,7 @@ A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvu
 
 Add this line to your application's Gemfile:
 
-    gem 'kosapi_client', github: 'flexik/kosapi_client'
+    gem 'kosapi_client', github: 'DraCzris/kosapi_client.rb'
 
 And then execute:
 
@@ -46,7 +46,7 @@ KOSapiClient can be created and configured in two ways.
 The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
 
 ```ruby
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET})
 client.parallels.find(42)
 ```
     
