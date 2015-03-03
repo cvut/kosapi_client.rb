@@ -63,6 +63,32 @@ end
 KOSapiClient.parallels.find(42)
 ```
 
+## How to extent API functionality
+
+### Add entity
+
+### Add resource
+
+1. Add concrete resource builder to `lib/kosapi_client/resource/`. Use current resources as an inspiration.
+2. Register resource in `lib/kosapi_client/api_client.rb` like:
+
+```ruby
+module KOSapiClient
+
+  class ApiClient
+    include ResourceMapper
+
+    # accessible resources definition
+    resource :courses
+    resource :course_events
+    resource :parallels
+    resource :exams
+    resource :semesters
+    resource :new_resource
+
+    attr_reader :http_client
+	...
+```
 
 ## Contributing
 

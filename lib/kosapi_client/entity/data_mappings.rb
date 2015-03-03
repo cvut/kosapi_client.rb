@@ -12,6 +12,10 @@ module KOSapiClient
         result
       end
 
+      def dump
+        self.to_hash.to_yaml
+      end
+
       private
       def convert_value(val)
         if val.respond_to? :to_hash

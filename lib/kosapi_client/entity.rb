@@ -16,3 +16,5 @@ require 'kosapi_client/entity/person'
 require 'kosapi_client/entity/teacher'
 require 'kosapi_client/entity/student'
 require 'kosapi_client/entity/exam'
+require 'kosapi_client/entity/semester'
+
