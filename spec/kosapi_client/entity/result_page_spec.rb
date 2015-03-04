@@ -7,15 +7,17 @@ describe KOSapiClient::Entity::ResultPage do
   subject(:result_page) { ResultPage.new([item], links) }
   let(:item) { double(:item) }
   let(:item2) { double(:second_item) }
-  let(:links) { instance_double(KOSapiClient::ResponseLinks, next: next_link) }
-  let(:next_page) { ResultPage.new([item2], instance_double(KOSapiClient::ResponseLinks, next: nil)) }
-  let(:next_link) { instance_double(KOSapiClient::Entity::Link, follow: next_page) }
+
+  let(:next_page) { ResultPage.new([item2], KOSapiClient::ResponseLinks.new(nil, nil)) }
+
+  let(:next_link) { instance_double(KOSapiClient::Entity::Link).instance_variable_set(:@target, next_page)}
+  let(:links) { KOSapiClient::ResponseLinks.new(nil, next_link) }
 
   describe '#each' do
 
     it 'is auto-paginated by default' do
       [item, item2].each { |it| expect(it).to receive(:foo) }
-      result_page.each { |it| it.foo }
+      result_page.each { |it| p it }
     end
 
     context 'with auto-pagination disabled' do
