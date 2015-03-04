@@ -9,7 +9,7 @@ module KOSapiClient
     resource :parallels
     resource :exams
     resource :semesters
-
+  
     attr_reader :http_client
 
     ##

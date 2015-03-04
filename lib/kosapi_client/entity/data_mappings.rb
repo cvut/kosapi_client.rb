@@ -70,12 +70,17 @@ module KOSapiClient
         def set_mapped_attribute(instance, name, source_hash, mapping_options, context)
           namespace = mapping_options[:namespace]
           src_element = mapping_options[:element] || name
+
           if namespace
             key = "#{namespace}_#{src_element}".to_sym
           else
             key = src_element
           end
+
           value = source_hash[key]
+
+          value = value[mapping_options[:array_wrapper_element]] if mapping_options.key? :array_wrapper_element
+
           if value.nil?
             raise "Missing value for attribute #{name}" if mapping_options[:required]
             if mapping_options[:type].is_a?(Array)

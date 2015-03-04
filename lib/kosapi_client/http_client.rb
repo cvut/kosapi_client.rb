@@ -8,22 +8,25 @@ module KOSapiClient
     end
 
     def send_debug_request(verb, url, options = {})
-      send_request verb, url, options, false
+      send_request verb, url, options, true
     end
 
-    def send_request(verb, url, options = {}, convert_response = true)
+    def send_request(verb, url, options = {}, debug_request = false)
       absolute_url = get_absolute_url(url)
+
+      p ">> #{absolute_url}" if debug_request
+
       result = @http_adapter.send_request(verb, absolute_url, options)
-      process_response(result, convert_response)
+      process_response(result, debug_request)
     end
 
-    def process_response(result, convert_response = true)
+    def process_response(result, debug_request = false)
       preprocessed = @preprocessor.preprocess(result)
+
+      return preprocessed if debug_request
+
       response = KOSapiClient::KOSapiResponse.new(preprocessed)
-
-      return @converter.convert response, create_context if convert_response
-
-      response
+      @converter.convert(response, create_context)
     end
 
     def get_absolute_url(url)
