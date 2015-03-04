@@ -17,7 +17,7 @@ describe KOSapiClient::Entity::ResultPage do
 
     it 'is auto-paginated by default' do
       [item, item2].each { |it| expect(it).to receive(:foo) }
-      result_page.each { |it| p it }
+      result_page.each { |it| it.foo }
     end
 
     context 'with auto-pagination disabled' do
