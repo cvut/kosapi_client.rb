@@ -11,7 +11,7 @@ module KOSapiClient
         @client = client
       end
 
-      def self.parse(contents, context = {})
+      def self.parse(contents, context)
         href = contents[:xlink_href] || contents[:href]
         new(contents[:__content__], href, contents[:rel], context[:client])
       end
