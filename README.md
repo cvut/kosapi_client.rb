@@ -17,7 +17,7 @@ A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvu
 
 Add this line to your application's Gemfile:
 
-    gem 'kosapi_client', github: 'flexik/kosapi_client'
+    gem 'kosapi_client', github: 'flexik/kosapi_client.rb'
 
 And then execute:
 
@@ -46,7 +46,7 @@ KOSapiClient can be created and configured in two ways.
 The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
 
 ```ruby
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET})
 client.parallels.find(42)
 ```
     
@@ -63,6 +63,43 @@ end
 KOSapiClient.parallels.find(42)
 ```
 
+## How to extend API functionality
+
+### Manualy explore KOSapi
+
+```ruby
+KOSapiClient.configure do |c|
+  c.client_id = ENV['KOSAPI_OAUTH_CLIENT_ID']
+  c.client_secret = ENV['KOSAPI_OAUTH_CLIENT_SECRET']
+end
+
+puts KOSapiClient.http_client.send_debug_request(:get, '/courses/MI-PAA/instances/B141').to_yaml
+```
+
+### Add entity
+
+### Add resource
+
+1. Add concrete resource builder to `lib/kosapi_client/resource/`. Use current resources as an inspiration.
+2. Register resource in `lib/kosapi_client/api_client.rb` like:
+
+```ruby
+module KOSapiClient
+
+  class ApiClient
+    include ResourceMapper
+
+    # accessible resources definition
+    resource :courses
+    resource :course_events
+    resource :parallels
+    resource :exams
+    resource :semesters
+    resource :new_resource
+
+    attr_reader :http_client
+	...
+```
 
 ## Contributing
 

@@ -27,8 +27,7 @@ module KOSapiClient
       map_data :superior_course, Link
       map_data :subcourses, Link
       map_data :tutorials_contents, MLString
-      map_data :instance #todo
-
+      map_data :instance, Coursin
     end
   end
 end

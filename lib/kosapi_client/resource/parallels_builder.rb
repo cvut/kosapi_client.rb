@@ -13,7 +13,6 @@ module KOSapiClient
         url_builder.set_path(id, 'students')
         self
       end
-
     end
   end
 end

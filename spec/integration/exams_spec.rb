@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Exams resource', :vcr, :integration do
+describe 'Exams resource', :integration do
   
   subject(:client) { create_kosapi_client }
 

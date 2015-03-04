@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Courses resource', :vcr, :integration do
+describe 'Courses resource', :integration do
   let(:credentials) { { client_id: ENV['KOSAPI_OAUTH_CLIENT_ID'], client_secret: ENV['KOSAPI_OAUTH_CLIENT_SECRET'] } }
   subject(:client) {  KOSapiClient.new(credentials) }
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Course events resource', :vcr, :integration do
+describe 'Course events resource', :integration do
   subject(:client) { create_kosapi_client }
 
   it 'returns course events' do
