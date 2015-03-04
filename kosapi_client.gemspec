@@ -6,7 +6,7 @@ require 'kosapi_client/version'
 Gem::Specification.new do |spec|
   spec.name          = 'kosapi_client'
   spec.version       = KOSapiClient::VERSION
-  spec.authors       = ['Tibor Szolár', 'Tomáš Polívka']
+  spec.authors       = ['Tibor Szolár']
   spec.email         = %w(szolatib@fit.cvut.cz)
   spec.description   = %q{REST client for KOSapi service}
   spec.summary       = %q{Simple Ruby client library for accessing KOSapi service resources}
