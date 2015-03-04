@@ -65,6 +65,17 @@ KOSapiClient.parallels.find(42)
 
 ## How to extend API functionality
 
+### Manualy explore KOSapi
+
+```ruby
+KOSapiClient.configure do |c|
+  c.client_id = ENV['KOSAPI_OAUTH_CLIENT_ID']
+  c.client_secret = ENV['KOSAPI_OAUTH_CLIENT_SECRET']
+end
+
+puts KOSapiClient.http_client.send_debug_request(:get, '/courses/MI-PAA/instances/B141').to_yaml
+```
+
 ### Add entity
 
 ### Add resource

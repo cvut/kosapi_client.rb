@@ -7,16 +7,23 @@ module KOSapiClient
       @converter = converter
     end
 
-    def send_request(verb, url, options = {})
-      absolute_url = get_absolute_url(url)
-      result = @http_adapter.send_request(verb, absolute_url, options)
-      process_response(result)
+    def send_debug_request(verb, url, options = {})
+      send_request verb, url, options, false
     end
 
-    def process_response(result)
+    def send_request(verb, url, options = {}, convert_response = true)
+      absolute_url = get_absolute_url(url)
+      result = @http_adapter.send_request(verb, absolute_url, options)
+      process_response(result, convert_response)
+    end
+
+    def process_response(result, convert_response = true)
       preprocessed = @preprocessor.preprocess(result)
       response = KOSapiClient::KOSapiResponse.new(preprocessed)
-      @converter.convert response, client: self
+
+      return @converter.convert response, create_context if convert_response
+
+      response
     end
 
     def get_absolute_url(url)
@@ -25,6 +32,12 @@ module KOSapiClient
       else
         "#{@http_adapter.base_url}/#{url}"
       end
+    end
+
+    def create_context
+      {
+          client: self
+      }
     end
 
     private
