@@ -40,6 +40,9 @@ module KOSapiClient
       @config ||= Configuration.new
     end
 
+    # Was interfering with mocking
+    def to_str
+      "KOSapi client"
+    end
   end
-
 end
