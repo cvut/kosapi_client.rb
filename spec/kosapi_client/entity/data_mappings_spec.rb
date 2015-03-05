@@ -108,6 +108,14 @@ describe KOSapiClient::Entity::DataMappings do
       expect(instance.foo).to eq '123'
     end
 
+    it 'supports array wrapping element name configuration' do
+      dummy_class.map_data :foo, String, array_wrapper_element: :bar
+      instance = dummy_class.parse(foo: {bar: ['123','456']})
+      expect(instance.foo).to be_a Array
+      expect(instance.foo.count).to eq 2
+      expect(instance.foo.first).to eq '123'
+    end
+
   end
 
   describe '#to_hash' do
