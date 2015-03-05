@@ -6,16 +6,11 @@ module KOSapiClient
   # determined at runtime based on API response.
 
   class ResponseConverter
-
-    def initialize(client)
-      @client = client
-    end
-
-    def convert(response)
+    def convert(response, context = {})
       if response.is_paginated?
-        convert_paginated(response)
+        convert_paginated(response, context)
       else
-        convert_single(response.item)
+        convert_single(response.item, context)
       end
     end
 
@@ -24,20 +19,20 @@ module KOSapiClient
     # @param response [KOSapiResponse] Response object wrapping array of hashes corresponding to entries
     # @return [ResultPage] ResultPage of domain objects
 
-    def convert_paginated(response)
+    def convert_paginated(response, context)
       items = response.items || []
-      converted_items = items.map{ |p| convert_single(p) }
-      Entity::ResultPage.new(converted_items, create_links(response))
+      converted_items = items.map{ |p| convert_single(p, context) }
+      Entity::ResultPage.new(converted_items, create_links(response, context))
     end
 
-    def convert_single(item)
+    def convert_single(item, context)
       type = detect_type(item)
-      convert_type(item, type)
+      convert_type(item, type, context)
     end
 
     private
-    def convert_type(hash, type)
-      type.parse(hash)
+    def convert_type(hash, type, context)
+      type.parse(hash, context)
     end
 
     def detect_type(hash)
@@ -55,9 +50,8 @@ module KOSapiClient
       entity_type
     end
 
-    def create_links(response)
-      ResponseLinks.parse(response.links_hash, @client)
+    def create_links(response, context)
+      ResponseLinks.parse(response.links_hash, context)
     end
-
   end
 end

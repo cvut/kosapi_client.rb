@@ -43,6 +43,12 @@ describe 'Parallels resource', :vcr, :integration do
     expect(parallel.link.link_rel).not_to be_nil
   end
 
+  it 'follows reference link properly' do
+    teacher = client.parallels.find(339540000).teachers.first
+
+    expect(teacher.username).to eq("balikm")
+  end
+
   it 'parses timetable slot ID' do
     page = client.parallels
     slot = page.items.first.timetable_slots.first

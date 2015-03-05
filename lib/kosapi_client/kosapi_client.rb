@@ -39,6 +39,9 @@ module KOSapiClient
       @client.respond_to?(method_name, include_private)
     end
 
+    # Was interfering with mocking
+    def to_str
+      "KOSapi client"
+    end
   end
-
 end
