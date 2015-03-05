@@ -27,7 +27,7 @@ And then execute:
 
 ```ruby
 # Creates a new instance of client with OAuth2 credentials
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET})
 
 # Retrieves first page of all course events
 course_events_page = client.course_events
@@ -40,13 +40,38 @@ parallels_page = client.parallels.offset(0).limit(50).query('course.department' 
 client.parallels.find(42).related
 ```
 
+## How to extent API functionality
+
+### Add resource
+
+1. Add concrete resource builder to `lib/kosapi_client/resource/`. Use current resources as an inspiration.
+2. Register resource in `lib/kosapi_client/api_client.rb` like:
+
+```ruby
+module KOSapiClient
+
+  class ApiClient
+    include ResourceMapper
+
+    # accessible resources definition
+    resource :courses
+    resource :course_events
+    resource :parallels
+    resource :exams
+    resource :semesters
+    resource :new_resource
+
+    attr_reader :http_client
+	...
+```
+
 ## Configuration
 
 KOSapiClient can be created and configured in two ways.
 The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
 
 ```ruby
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET})
 client.parallels.find(42)
 ```
     
