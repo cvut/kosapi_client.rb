@@ -5,6 +5,8 @@ module KOSapiClient
   singleton_class.class_eval do
 
     attr_reader :client
+    
+    alias_method :to_str, :to_s
 
     def new(credentials, base_url = DEFAULT_KOSAPI_BASE_URL)
       http_adapter = OAuth2HttpAdapter.new(credentials, base_url)
@@ -37,11 +39,6 @@ module KOSapiClient
 
     def respond_to_missing?(method_name, include_private = false)
       @client.respond_to?(method_name, include_private)
-    end
-
-    # Was interfering with mocking
-    def to_str
-      "KOSapi client"
     end
   end
 end
