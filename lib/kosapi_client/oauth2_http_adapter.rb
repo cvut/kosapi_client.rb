@@ -10,6 +10,7 @@ module KOSapiClient
 
     def initialize(credentials, base_url, opts = {})
       @base_url = base_url
+      @credentials = credentials
       auth_url = opts[:auth_url] || DEFAULT_AUTH_URL
       token_url = opts[:token_url] || DEFAULT_TOKEN_URL
       MultiXml.parser = :ox # make sure to use Ox because of different namespace handling in other MultiXML parsers
@@ -17,6 +18,7 @@ module KOSapiClient
     end
 
     def send_request(verb, url, options = {})
+      raise 'No credentials set' if @credentials.empty?
       token.request(verb, url, options)
     end
 

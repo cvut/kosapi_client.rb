@@ -1,13 +1,21 @@
 module KOSapiClient
-  class Configuration
+  class Configuration < Struct.new(:client_id, :client_secret, :base_url)
 
-    attr_accessor :client_id, :client_secret
+    DEFAULT_OPTIONS = {
+      base_url: 'https://kosapi.fit.cvut.cz/api/3'
+    }
+
+    def initialize(options = {})
+      DEFAULT_OPTIONS.merge(options).each do |option, value|
+        self[option] = value
+      end
+    end
 
     def credentials
       if client_id && client_secret
         {client_id: client_id, client_secret: client_secret}
       else
-        raise 'No credentials set'
+        {}
       end
     end
 

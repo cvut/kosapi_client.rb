@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe KOSapiClient::ApiClient do
-  subject(:client) { KOSapiClient::ApiClient.new(double) }
+  subject(:client) { KOSapiClient::ApiClient.new(KOSapiClient::Configuration.new) }
 
   it 'responds to api resource methods' do
     expect(client).to respond_to :course_events

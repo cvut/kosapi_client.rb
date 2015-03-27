@@ -14,9 +14,9 @@ module KOSapiClient
     ##
     # Creates a new KOSapi client.
     #
-    def initialize(http_client, base_url = DEFAULT_KOSAPI_BASE_URL)
-      @http_client = http_client
-      @base_url = base_url
+    def initialize(config)
+      http_adapter = OAuth2HttpAdapter.new(config.credentials, config.base_url)
+      @http_client = HTTPClient.new(http_adapter)
     end
 
     def create_builder(resource_name)

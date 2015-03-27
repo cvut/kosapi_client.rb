@@ -3,10 +3,11 @@ require 'spec_helper'
 describe KOSapiClient do
 
   before do
-    @client = KOSapiClient.configure do |c|
+    KOSapiClient.configure do |c|
       c.client_id = 'foo'
       c.client_secret = 'bar'
     end
+    @client = KOSapiClient.client
   end
 
   describe '.configure' do
@@ -21,7 +22,7 @@ describe KOSapiClient do
 
     it 'cleans stored ApiClient instance' do
       KOSapiClient.reset
-      expect(KOSapiClient.client).to be_nil
+      expect(KOSapiClient.client).not_to be @client
     end
 
   end
@@ -43,9 +44,9 @@ describe KOSapiClient do
     expect { KOSapiClient.foo }.to raise_error NoMethodError
   end
 
-  it 'throws error when calling client methods with no configured client' do
+  it 'throws error when sending request with no configured credentials' do
     KOSapiClient.reset
-    expect { KOSapiClient.course_events }.to raise_error(RuntimeError)
+    expect { KOSapiClient.course_events.items }.to raise_error(RuntimeError)
   end
 
   it 'responds to client methods' do

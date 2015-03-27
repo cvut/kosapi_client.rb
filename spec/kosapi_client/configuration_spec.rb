@@ -22,8 +22,8 @@ describe KOSapiClient::Configuration do
       expect(configuration.credentials).to eq({client_id: 'foo', client_secret: 'bar'})
     end
 
-    it 'throws error when no credentials set' do
-      expect { configuration.credentials }.to raise_error(RuntimeError)
+    it 'returns empty hash when no credentials set' do
+      expect(configuration.credentials).to eq({})
     end
 
   end
