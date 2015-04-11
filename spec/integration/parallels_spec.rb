@@ -44,7 +44,7 @@ describe 'Parallels resource', :vcr, :integration do
   end
 
   it 'parses timetable slot ID' do
-    page = client.parallels
+    page = client.parallels.query('course.code' => 'MI-PAA')
     slot = page.items.first.timetable_slots.first
     expect(slot.id).not_to be_nil
   end
