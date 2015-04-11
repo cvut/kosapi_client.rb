@@ -42,6 +42,9 @@ module KOSapiClient
       # Example:
       #   client.semesters.current
       ###
+      def current
+        find 'current'
+      end
 
       ###
       # GET /semesters/next

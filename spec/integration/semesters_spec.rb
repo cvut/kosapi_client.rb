@@ -36,6 +36,14 @@ describe 'Semesters resource', :vcr, :integration do
     expect(semester.link.link_rel).not_to be_nil
   end
 
+  it 'fetches current semester' do
+    semester = client.semesters.current
+    expect(semester.start_date).not_to be_nil
+    expect(semester.end_date).not_to be_nil
+
+    expect(Time.new).to be_between(semester.start_date, semester.end_date)
+  end
+
   it 'fetches next semester' do
     semester = client.semesters.next
     expect(semester.start_date).not_to be_nil
