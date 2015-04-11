@@ -6,9 +6,9 @@ module KOSapiClient
       #   GET /semesters              =>  client.semesters.items
       #   GET /semesters/{code}       =>  client.semesters.find({code})
       #   GET /semesters/next         =>  client.semesters.next
+      #   GET /semesters/current      =>  client.semesters.current
       #
       # TODO:
-      #   GET /semesters/current      =>  client.semesters.current
       #   GET /semesters/prev
       #   GET /semesters/scheduling
       ###
