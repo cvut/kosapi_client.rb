@@ -17,7 +17,7 @@ A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvu
 
 Add this line to your application's Gemfile:
 
-    gem 'kosapi_client', github: 'flexik/kosapi_client'
+    gem 'kosapi_client', github: 'cvut/kosapi_client.rb'
 
 And then execute:
 

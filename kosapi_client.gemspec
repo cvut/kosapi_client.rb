@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w(szolatib@fit.cvut.cz)
   spec.description   = %q{REST client for KOSapi service}
   spec.summary       = %q{Simple Ruby client library for accessing KOSapi service resources}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/cvut/kosapi_client.rb'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)
