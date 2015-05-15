@@ -1,22 +1,25 @@
 # coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'kosapi_client/version'
+require File.expand_path('../lib/kosapi_client/version', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name          = 'kosapi_client'
   spec.version       = KOSapiClient::VERSION
   spec.authors       = ['Tibor Szolár']
-  spec.email         = %w(szolatib@fit.cvut.cz)
-  spec.description   = %q{REST client for KOSapi service}
-  spec.summary       = %q{Simple Ruby client library for accessing KOSapi service resources}
+  spec.email         = 'szolatib@fit.cvut.cz'
+  spec.description   = 'REST client for KOSapi service'
+  spec.summary       = 'Simple Ruby client library for accessing KOSapi service resources'
   spec.homepage      = 'https://github.com/cvut/kosapi_client.rb'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($/)
+  begin
+    spec.files       = `git ls-files -z -- */* {LICENSE,Rakefile,README}*`.split("\x0")
+  rescue
+    spec.files       = Dir['**/*']
+  end
+
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
-  spec.require_paths = %w(lib)
+  spec.test_files    = spec.files.grep(%r{^spec/})
+  spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
