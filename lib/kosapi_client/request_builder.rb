@@ -19,6 +19,11 @@ module KOSapiClient
       self
     end
 
+    def sem(code)
+      @url_builder.set_query_param(:sem, code)
+      self
+    end
+
     def query(params = {})
       raise 'Empty parameters to query are not allowed' if params.empty?
       if params.instance_of?(String)
