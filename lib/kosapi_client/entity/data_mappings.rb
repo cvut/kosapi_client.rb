@@ -36,7 +36,7 @@ module KOSapiClient
           if self.superclass.respond_to? :attr_mappings
             parent_mappings = self.superclass.attr_mappings
           end
-          @data_mappings.reverse_merge(parent_mappings || {})
+          (parent_mappings || {}).merge(@data_mappings)
         end
 
         # Parses composed domain type from hash response structure.
