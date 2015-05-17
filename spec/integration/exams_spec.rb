@@ -12,4 +12,9 @@ describe 'Exams resource', :vcr, :integration do
     expect(client.exams.find(193156727405).attendees.count).to be > 0
   end
 
+  it 'allows multiple examiners' do
+    exam = client.exams.find(613664749005)
+    expect(exam.examiners.count).to be 2
+    expect(exam.examiners.first.link_id).to eq 'zhoufjar'
+  end
 end

@@ -8,6 +8,7 @@ module KOSapiClient
       map_data :department, Link
       map_data :end_date, Time
       map_data :examiner, Link
+      map_data :examiners, [Link], element: :teacher, path: :examiners
       map_data :note
       map_data :occupied, Integer
       map_data :resit, Boolean

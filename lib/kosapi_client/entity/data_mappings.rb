@@ -71,7 +71,7 @@ module KOSapiClient
           else
             key = src_element
           end
-          value = source_hash[key]
+          value = retrieve_value(source_hash, key, mapping_options)
           if value.nil?
             raise "Missing value for attribute #{name}" if mapping_options[:required]
             if mapping_options[:type].is_a?(Array)
@@ -104,6 +104,16 @@ module KOSapiClient
           else
             [ convert_type(values, type) ]
           end
+        end
+
+        def retrieve_value(source_hash, key, mapping_options)
+          path = mapping_options[:path]
+          if path
+            parent_element = source_hash[path]
+          else
+            parent_element = source_hash
+          end
+          parent_element[key] if parent_element
         end
 
       end
