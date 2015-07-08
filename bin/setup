@@ -1,0 +1,23 @@
+#!/bin/bash
+set -euo pipefail
+IFS=$'\n\t'
+
+echo "You will need OAuth credentials to access KOSapi and run integration tests."
+echo "Register new project at https://auth.fit.cvut.cz/manager/ with readonly access to KOSapi
+and enter client ID and secret for your default service account."
+
+echo -n "Client ID (KOSAPI_OAUTH_CLIENT_ID): "
+read client_id
+echo -n "Client secret (KOSAPI_OAUTH_CLIENT_SECRET): "
+read client_secret
+
+script_path=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+env_file=$(realpath "$script_path/../.env")
+echo "Writing credentials to $env_file"
+cat << EOF > "$env_file"
+KOSAPI_OAUTH_CLIENT_ID=$client_id
+KOSAPI_OAUTH_CLIENT_SECRET=$client_secret
+EOF
+
+echo "Running bundle install"
+bundle install

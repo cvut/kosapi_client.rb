@@ -49,11 +49,11 @@ The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
 client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
 client.parallels.find(42)
 ```
-    
+
 The other way is to use configure client using `KOSapiClient.configure` and setting options inside block.
 In addition to returning the client instance from `configure`, the client is also stored in `KOSapiClient` singleton property and its methods can be accessed by calling them on `KOSapiClient` directly.
-This approach is more suitable for configuring client inside an initializer. 
- 
+This approach is more suitable for configuring client inside an initializer.
+
 ```ruby
 KOSapiClient.configure do |c|
   c.client_id = ENV['KOSAPI_OAUTH_CLIENT_ID']
@@ -63,11 +63,25 @@ end
 KOSapiClient.parallels.find(42)
 ```
 
+## Development
 
-## Contributing
+Run `bin/setup` script to setup dependencies and create `.env` file. You will need to obtain access to KOSapi.
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+### OAuth Credentials
+
+You will need a KOSapi OAuth credentials from the [Apps Manager](https://auth.fit.cvut.cz/manager/) to run integration specs.
+
+OAuth credentials need to be exposed as environment variables `KOSAPI_OAUTH_CLIENT_ID` and `KOSAPI_OAUTH_CLIENT_SECRET`. If you put them into `.env` file, the test suite will load them for you automatically:
+
+```
+KOSAPI_OAUTH_CLIENT_ID=xxx-xxxx-xxxx
+KOSAPI_OAUTH_CLIENT_SECRET=yyyyyyyyy
+```
+
+### Contributing
+
+Bug reports and pull requests are welcome on GitHub at [cvut/kosapi_client.rb](https://github.com/cvut/kosapi_client.rb). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

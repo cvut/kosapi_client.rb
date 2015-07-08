@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "dotenv"
+require "kosapi_client"
+
+Dotenv.load
+
+KOSapiClient.configure do |c|
+  c.client_id = ENV['KOSAPI_OAUTH_CLIENT_ID']
+  c.client_secret = ENV['KOSAPI_OAUTH_CLIENT_SECRET']
+end
+
+require "irb"
+IRB.start
