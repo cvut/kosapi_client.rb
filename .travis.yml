@@ -2,9 +2,9 @@ language: ruby
 sudo: false
 rvm:
 - 2.0.0
-- 2.1.2
-- 2.1.5
-- 2.2.1
+- 2.1.6
+- 2.2.2
+- ruby-head
 #- jruby-19mode
 env:
   global:
@@ -13,3 +13,6 @@ env:
 addons:
   code_climate:
     repo_token: e2f6fda133ad17e3f7baa6f56a7c7e9ea6da8758d7ca1a0c56dc33be5b473d89
+matrix:
+  allow_failures:
+    - rvm: ruby-head
