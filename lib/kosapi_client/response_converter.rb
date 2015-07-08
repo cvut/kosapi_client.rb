@@ -1,3 +1,5 @@
+using Corefines::String::camelcase
+
 module KOSapiClient
 
   # This class converts parsed response in hash format
@@ -46,7 +48,7 @@ module KOSapiClient
     end
 
     def extract_type(type_str)
-      type_name = type_str.camelize
+      type_name = type_str.camelcase(:upper)
       begin
         entity_type = Entity.const_get(type_name)
       rescue
