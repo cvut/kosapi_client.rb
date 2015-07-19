@@ -10,6 +10,7 @@ module KOSapiClient
     resource :course_events
     resource :parallels
     resource :exams
+    resource :semesters
 
     attr_reader :http_client
 
