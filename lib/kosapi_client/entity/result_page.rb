@@ -30,6 +30,7 @@ module KOSapiClient
       end
 
       def each(&block)
+        return to_enum(__method__) unless block_given?
         items.each(&block)
         return unless @auto_paginate
         next_link = self.next
