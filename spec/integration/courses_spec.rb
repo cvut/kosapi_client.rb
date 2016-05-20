@@ -11,7 +11,7 @@ describe 'Courses resource', :vcr, :integration do
   end
 
   it 'provides courses data details' do
-    page = client.courses.offset(20).query(department: '18*').detail
+    page = client.courses.offset(20).query(department: '18*', completion: 'EXAM').detail
     expect(page.items.last.description).not_to be_nil
   end
 
