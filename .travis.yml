@@ -3,11 +3,9 @@ sudo: false
 cache:
   bundler: true
 rvm:
-- 2.0.0
-- 2.1.6
-- 2.2.2
-- ruby-head
-#- jruby-19mode
+  - 2.2.5
+  - 2.3.1
+  - ruby-head
 env:
   global:
   - secure: Cw2fNGLbO58H8Z7VJ75LeC7+MEJ7SREexN7n311PITb6NVY2lv0w6WjOSEc4VY/DgGZ1n5SR/ra+oSXOYKc4XeQstNrcs3h6y8VKAegqbdEEC2pbM5k8lH7GhOJejmSVNOfo25g7fwXQuIjttbHEfPYhpK9tYqdIwpGt1dOCh8c=
@@ -18,3 +16,5 @@ addons:
 matrix:
   allow_failures:
     - rvm: ruby-head
+before_install:
+  - gem update --system  # https://github.com/vcr/vcr/issues/582
