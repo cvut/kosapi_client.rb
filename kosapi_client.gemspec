@@ -28,14 +28,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec-given'
   spec.add_development_dependency 'dotenv'
-  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'vcr', '~> 3.0'
   spec.add_development_dependency 'codeclimate-test-reporter'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'fuubar', '~> 2.0.0.rc1'
 
   spec.add_runtime_dependency 'oauth2'
-  spec.add_runtime_dependency 'faraday', '~> 0.8.9' # VCR does not work with newer versions yet
+  spec.add_runtime_dependency 'faraday', '~> 0.9.0'
   spec.add_runtime_dependency 'corefines', '~> 1.6'
   spec.add_runtime_dependency 'escape_utils' unless RUBY_PLATFORM == 'java' # used for uri_template
   spec.add_runtime_dependency 'uri_template'
