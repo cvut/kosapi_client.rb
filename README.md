@@ -27,7 +27,7 @@ And then execute:
 
 ```ruby
 # Creates a new instance of client with OAuth2 credentials
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({ client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET })
 
 # Retrieves first page of all course events
 course_events_page = client.course_events
@@ -43,14 +43,14 @@ client.parallels.find(42).related
 ## Configuration
 
 KOSapiClient can be created and configured in two ways.
-The simple way is to call `KOSapiClient.new`, which returns ApiClient instance.
+The simple way is to call `KOSapiClient.new`, which returns an ApiClient instance.
 
 ```ruby
-client = KOSapiClient.new(OAUTH_CLIENT_ID, OAUTH_SECRET)
+client = KOSapiClient.new({ client_id: OAUTH_CLIENT_ID, client_secret: OAUTH_SECRET })
 client.parallels.find(42)
 ```
 
-The other way is to use configure client using `KOSapiClient.configure` and setting options inside block.
+The other way is to configure client using `KOSapiClient.configure` and setting options inside a block.
 In addition to returning the client instance from `configure`, the client is also stored in `KOSapiClient` singleton property and its methods can be accessed by calling them on `KOSapiClient` directly.
 This approach is more suitable for configuring client inside an initializer.
 
