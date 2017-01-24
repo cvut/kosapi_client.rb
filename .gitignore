@@ -18,3 +18,4 @@ tmp
 .idea
 spec/cassettes
 .env
+vendor/bundle
