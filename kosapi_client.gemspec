@@ -29,10 +29,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec-given'
   spec.add_development_dependency 'dotenv'
   spec.add_development_dependency 'vcr', '~> 3.0'
-  spec.add_development_dependency 'codeclimate-test-reporter'
+  spec.add_development_dependency 'codeclimate-test-reporter', '~> 1.0.0'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'coveralls'
   spec.add_development_dependency 'fuubar', '~> 2.2.0'
+  spec.add_development_dependency 'simplecov'
 
   spec.add_runtime_dependency 'oauth2'
   spec.add_runtime_dependency 'faraday', '~> 0.9'
