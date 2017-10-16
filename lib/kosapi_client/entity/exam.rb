@@ -1,3 +1,5 @@
+require 'date'
+
 module KOSapiClient
   module Entity
     class Exam < BaseEntity
