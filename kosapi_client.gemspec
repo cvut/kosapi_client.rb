@@ -31,7 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'oauth2', '~> 1.4'
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'corefines', '~> 1.6'
-  spec.add_runtime_dependency 'escape_utils' unless RUBY_PLATFORM == 'java' # used for uri_template
-  spec.add_runtime_dependency 'uri_template'
-  spec.add_runtime_dependency 'ox' # required for correct XML namespace handling (MultiXML, oauth2)
+  spec.add_runtime_dependency 'escape_utils', '~> 1.0' unless RUBY_PLATFORM == 'java' # used for uri_template
+  spec.add_runtime_dependency 'uri_template', '~> 0.7.0'
+  # Required for correct XML namespace handling (MultiXML, oauth2).
+  spec.add_runtime_dependency 'ox', '~> 2.1'
 end
