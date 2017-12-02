@@ -8,6 +8,7 @@ module KOSapiClient
     # accessible resources definition
     resource :courses
     resource :course_events
+    resource :divisions
     resource :parallels
     resource :exams
     resource :teachers
