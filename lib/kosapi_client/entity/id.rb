@@ -10,4 +10,3 @@ module KOSapiClient
     end
   end
 end
-

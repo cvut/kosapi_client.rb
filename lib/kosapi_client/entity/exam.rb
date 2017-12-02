@@ -20,7 +20,7 @@ module KOSapiClient
       map_data :start_date, Time
       map_data :substitutes, Enum
       map_data :superior, Link
-      map_data :term_type, Enum 
+      map_data :term_type, Enum
 
     end
   end

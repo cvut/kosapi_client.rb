@@ -56,4 +56,3 @@ module KOSapiClient
 
   end
 end
-
