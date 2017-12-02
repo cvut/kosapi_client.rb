@@ -11,6 +11,7 @@ module KOSapiClient
     resource :divisions
     resource :parallels
     resource :exams
+    resource :semesters
     resource :teachers
 
     attr_reader :http_client
