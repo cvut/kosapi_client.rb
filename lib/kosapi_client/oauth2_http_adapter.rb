@@ -14,7 +14,13 @@ module KOSapiClient
       auth_url = opts[:auth_url] || DEFAULT_AUTH_URL
       token_url = opts[:token_url] || DEFAULT_TOKEN_URL
       MultiXml.parser = :ox # make sure to use Ox because of different namespace handling in other MultiXML parsers
-      @client = OAuth2::Client.new(credentials[:client_id], credentials[:client_secret], site: base_url, authorize_url: auth_url, token_url: token_url)
+      @client = OAuth2::Client.new(
+        credentials[:client_id],
+        credentials[:client_secret],
+        auth_scheme: :basic_auth,
+        site: base_url,
+        authorize_url: auth_url,
+        token_url: token_url)
     end
 
     def send_request(verb, url, options = {})

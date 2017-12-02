@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'fuubar', '~> 2.2.0'
   spec.add_development_dependency 'simplecov'
 
-  spec.add_runtime_dependency 'oauth2'
+  spec.add_runtime_dependency 'oauth2', '~> 1.4'
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'corefines', '~> 1.6'
   spec.add_runtime_dependency 'escape_utils' unless RUBY_PLATFORM == 'java' # used for uri_template
