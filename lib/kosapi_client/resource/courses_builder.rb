@@ -7,6 +7,13 @@ module KOSapiClient
         self
       end
 
+      # Selects courses scheduled in the specified semester(s).
+      def sem(*semesters)
+        @url_builder.set_query_param(:sem, semesters.join(','))
+        self
+      end
+
+      alias semester sem
     end
   end
 end
