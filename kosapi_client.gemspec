@@ -11,14 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/cvut/kosapi_client.rb'
   spec.license       = 'MIT'
 
-  begin
-    spec.files       = `git ls-files -z -- */* {LICENSE,Rakefile,README}*`.split("\x0")
-  rescue
-    spec.files       = Dir['**/*']
-  end
-
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^spec/})
+  spec.files         = Dir['lib/**/*', '*.gemspec', 'LICENSE', 'README*']
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.0.0'
