@@ -1,3 +1,5 @@
+require 'kosapi_client/entity/coursin'
+
 module KOSapiClient
   module Entity
     class Course < BaseEntity
@@ -27,8 +29,13 @@ module KOSapiClient
       map_data :superior_course, Link
       map_data :subcourses, Link
       map_data :tutorials_contents, MLString
-      map_data :instance #todo
+      map_data :instances, [Coursin], element: :instance
 
+      def instance(semester_code)
+        instances.find do |coursin|
+          coursin.semester.link_href == "semesters/#{semester_code}/"
+        end
+      end
     end
   end
 end
