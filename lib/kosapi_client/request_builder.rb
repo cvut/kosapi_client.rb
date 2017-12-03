@@ -37,7 +37,7 @@ module KOSapiClient
       @http_client = http_client
       @operation = :get
       @body = nil
-      @headers = {}
+      @headers = { Accept: 'application/atom+xml' }
       @url_builder = url_builder
       @id = nil
     end
