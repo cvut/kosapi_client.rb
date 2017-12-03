@@ -32,6 +32,26 @@ module KOSapiClient
 
     alias where query
 
+    # Specify order of the results.
+    #
+    # Examples:
+    #   .order_by(:firstName, :lastName)
+    #   .order_by(:firstName, lastName: :desc)
+    #   .order_by(firstName: :asc, lastName: desc)
+    def order_by(*args, **kwargs)
+      ordering = args + kwargs.map do |attr, dir|
+        if dir != :asc && dir != :desc
+          raise ArgumentError, "Direction must be :asc, or :desc, but got #{dir.inspect}"
+        end
+        "#{attr}@#{dir}"
+      end
+
+      @url_builder.set_query_param(:orderBy, ordering.join(','))
+      self
+    end
+
+    alias order order_by
+
     def initialize(resource_name, http_client, url_builder = URLBuilder.new(resource_name.to_s))
       @base_url = resource_name
       @http_client = http_client
