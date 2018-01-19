@@ -10,6 +10,7 @@ module KOSapiClient
     resource :course_events
     resource :divisions
     resource :parallels
+    resource :parameters
     resource :exams
     resource :semesters
     resource :teachers
