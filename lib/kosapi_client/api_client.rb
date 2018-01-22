@@ -6,6 +6,7 @@ module KOSapiClient
     include ResourceMapper
 
     # accessible resources definition
+    resource :branches
     resource :courses
     resource :course_events
     resource :divisions
