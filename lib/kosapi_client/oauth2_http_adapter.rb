@@ -10,7 +10,7 @@ module KOSapiClient
 
     def initialize(credentials, base_url, opts = {})
       @base_url = base_url
-      @credentials = { client_id: credentials[:client_id] , client_secret: credentials[:client_secret] }
+      construct_credentials(credentials)
       auth_url = opts[:auth_url] || DEFAULT_AUTH_URL
       token_url = opts[:token_url] || DEFAULT_TOKEN_URL
       MultiXml.parser = :ox # make sure to use Ox because of different namespace handling in other MultiXML parsers
@@ -45,6 +45,14 @@ module KOSapiClient
 
     def construct_token(token_hash)
       @token = OAuth2::AccessToken.from_hash(@client, token_hash)
+    end
+
+    def construct_credentials(credentials)
+      @credentials = {}
+      if credentials[:client_id] && credentials[:client_secret]
+        @credentials[:client_id] = credentials[:client_id]
+        @credentials[:client_secret] = credentials[:client_secret]
+      end
     end
   end
 end

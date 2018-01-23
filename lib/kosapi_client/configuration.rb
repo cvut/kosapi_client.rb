@@ -12,11 +12,10 @@ module KOSapiClient
     end
 
     def credentials
-      if (client_id && client_secret) || client_token
-#        p {:client_id => client_id, :client_secret => client_secret, :client_token => client_token}
-        h = {client_id: client_id, client_secret: client_secret, client_token: client_token}
-        p h
-        h
+      if client_token
+        {client_token: client_token}
+      elsif client_id && client_secret
+        {client_id: client_id, client_secret: client_secret}
       else
         {}
       end
