@@ -27,6 +27,10 @@ module KOSapiClient
       end
     end
 
+    def get_access_token
+      @http_adapter.get_token
+    end
+
     private
     def is_absolute(url)
       url.start_with?('http')
