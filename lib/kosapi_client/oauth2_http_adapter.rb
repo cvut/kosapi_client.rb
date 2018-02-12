@@ -25,7 +25,7 @@ module KOSapiClient
     end
 
     def send_request(verb, url, options = {})
-      raise 'No credentials set' if @credentials.empty?
+      raise 'No credentials set' if @credentials.empty? && !@token
       token.request(verb, url, options)
     end
 
