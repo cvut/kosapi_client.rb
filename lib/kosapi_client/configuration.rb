@@ -1,5 +1,5 @@
 module KOSapiClient
-  class Configuration < Struct.new(:client_id, :client_secret, :base_url)
+  class Configuration < Struct.new(:client_id, :client_secret, :client_token, :base_url)
 
     DEFAULT_OPTIONS = {
       base_url: 'https://kosapi.fit.cvut.cz/api/3'
@@ -12,7 +12,9 @@ module KOSapiClient
     end
 
     def credentials
-      if client_id && client_secret
+      if client_token
+        {client_token: client_token}
+      elsif client_id && client_secret
         {client_id: client_id, client_secret: client_secret}
       else
         {}

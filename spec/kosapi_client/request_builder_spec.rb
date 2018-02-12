@@ -76,5 +76,18 @@ describe KOSapiClient::RequestBuilder do
 
   end
 
+  describe '#fields' do
+    
+    it_behaves_like 'fluent api command', method_name, 'foo'
 
+    it 'sets query param' do
+      expect(url_builder).to receive(:set_query_param).with(:fields, 'foo')
+      builder.fields('foo')
+    end
+
+    it 'throws error when xpartial is empty' do
+      expect { builder.fields({}) }.to raise_error(RuntimeError)
+    end
+
+  end
 end

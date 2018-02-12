@@ -32,6 +32,12 @@ module KOSapiClient
 
     alias where query
 
+    def fields(xpartial = '')
+      raise 'Empty xpartial expresion to fields is not allowed' if xpartial.empty?
+      @url_builder.set_query_param(:fields, xpartial)
+      self
+    end
+
     # Specify order of the results.
     #
     # Examples:
