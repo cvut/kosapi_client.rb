@@ -107,8 +107,11 @@ module KOSapiClient
         end
 
         def retrieve_value(source_hash, key, mapping_options)
-          path = mapping_options[:path]
-          if path
+          if (reader = mapping_options[:reader])
+            return reader.call(source_hash, key)
+          end
+
+          if (path = mapping_options[:path])
             parent_element = source_hash[path]
           else
             parent_element = source_hash
