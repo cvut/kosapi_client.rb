@@ -1,5 +1,5 @@
 module KOSapiClient
-  class Configuration < Struct.new(:client_id, :client_secret, :base_url, :token_url, :auth_url)
+  class Configuration < Struct.new(:client_id, :client_secret, :base_url, :token_url, :auth_url, :connection_opts)
 
     DEFAULT_OPTIONS = {
       base_url: 'https://kosapi.fit.cvut.cz/api/3'
