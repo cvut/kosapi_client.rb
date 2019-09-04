@@ -14,6 +14,16 @@ describe KOSapiClient::Configuration do
     expect(configuration.client_secret).to eq 'bar'
   end
 
+  it 'stores token_url' do
+    configuration.token_url = 'baz'
+    expect(configuration.token_url).to eq 'baz'
+  end
+
+  it 'stores auth_url' do
+    configuration.auth_url = 'qux'
+    expect(configuration.auth_url).to eq 'qux'
+  end
+
   describe '#credentials' do
 
     it 'returns OAUTH credentials when set' do
