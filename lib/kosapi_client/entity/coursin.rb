@@ -7,6 +7,7 @@ module KOSapiClient
       map_data :semester, Link, element: 1, path: :semester
       map_data :capacity_overfill, Enum
       map_data :occupied, Integer
+      map_data :editors, [Link], element: :teacher, path: :editors
       map_data :examiners, [Link], element: :teacher, path: :examiners
       map_data :guarantors, [Link], element: :teacher, path: :guarantors
       map_data :instructors, [Link], element: :teacher, path: :instructors
