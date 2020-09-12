@@ -10,6 +10,9 @@ module KOSapiClient
       map_data :first_hour, Integer
       map_data :parity, Enum
       map_data :title, String
+      map_data :start_time, Time
+      map_data :end_time, Time
+      map_data :weeks, String
 
     end
   end
