@@ -12,7 +12,7 @@ module KOSapiClient
       map_data :room, Link
       map_data :start_time, Time
       map_data :end_time, Time
-      map_data :weeks, MLString
+      map_data :weeks, String
 
     end
   end
