@@ -12,6 +12,10 @@ module KOSapiClient
         result
       end
 
+      def dump
+        self.to_hash.to_yaml
+      end
+
       private
       def convert_value(val)
         if val.respond_to? :to_hash
@@ -44,26 +48,26 @@ module KOSapiClient
         # @param [Hash] content hash structure from API response corresponding to single domain object
         # @return [BaseEntity] parsed domain object
         def parse(content, context = {})
-          instance = new()
-          set_mapped_attributes(instance, content)
+          instance = new
+          set_mapped_attributes(instance, content, context)
           instance
         end
 
         # Creates new domain object instance and sets values
         # of mapped domain object attributes from source hash.
         # Attributes are mapped by .map_data method.
-        def set_mapped_attributes(instance, source_hash)
+        def set_mapped_attributes(instance, source_hash, context)
           if self.superclass.respond_to? :set_mapped_attributes
-            self.superclass.set_mapped_attributes(instance, source_hash)
+            self.superclass.set_mapped_attributes(instance, source_hash, context)
           end
           raise "Missing data mappings for entity #{self}" unless @data_mappings
           @data_mappings.each do |name, options|
-            set_mapped_attribute(instance, name, source_hash, options)
+            set_mapped_attribute(instance, name, source_hash, options, context)
           end
         end
 
         private
-        def set_mapped_attribute(instance, name, source_hash, mapping_options)
+        def set_mapped_attribute(instance, name, source_hash, mapping_options, context)
           namespace = mapping_options[:namespace]
           src_element = mapping_options[:element] || name
           if namespace
@@ -80,17 +84,17 @@ module KOSapiClient
               return
             end
           else
-            value = convert_type(value, mapping_options[:type])
+            value = convert_type value, mapping_options[:type], context
           end
             instance.send("#{name}=".to_sym, value)
         end
 
-        def convert_type(value, type)
+        def convert_type(value, type, context = {})
           return value.to_i if type == Integer
           return value if type == String
-          return convert_array(value, type.first) if type.is_a?(Array)
+          return convert_array(value, type.first, context) if type.is_a?(Array)
 
-          return type.parse(value) if type.respond_to? :parse
+          return type.parse(value, context) if type.respond_to? :parse
           raise "Unknown type #{type} to convert value #{value} to."
         end
 
@@ -98,11 +102,11 @@ module KOSapiClient
         # It checks whether the value is really an array, because
         # when API returns a single value it does not get parsed
         # into an array.
-        def convert_array(values, type)
+        def convert_array(values, type, context)
           if values.is_a?(Array)
-            values.map { |it| convert_type(it, type) }
+            values.map { |it| convert_type(it, type, context) }
           else
-            [ convert_type(values, type) ]
+            [ convert_type(values, type, context) ]
           end
         end
 

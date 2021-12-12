@@ -1,7 +1,7 @@
 module KOSapiClient
   class HTTPClient
 
-    def initialize(http_adapter, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new(self))
+    def initialize(http_adapter, preprocessor = ResponsePreprocessor.new, converter = ResponseConverter.new)
       @http_adapter = http_adapter
       @preprocessor = preprocessor
       @converter = converter
@@ -15,8 +15,8 @@ module KOSapiClient
 
     def process_response(result)
       preprocessed = @preprocessor.preprocess(result)
-      response = KOSapiClient::KOSapiResponse.new(preprocessed)
-      @converter.convert(response)
+      response = KOSapiClient::KOSapiResponse.new preprocessed
+      @converter.convert response, create_context
     end
 
     def get_absolute_url(url)
@@ -30,6 +30,12 @@ module KOSapiClient
     private
     def is_absolute(url)
       url.start_with?('http')
+    end
+
+    def create_context
+      {
+          client: self
+      }
     end
 
   end

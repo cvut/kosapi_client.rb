@@ -5,9 +5,8 @@ describe KOSapiClient::Entity::Link do
   Link = KOSapiClient::Entity::Link
 
   let(:client) { instance_double(KOSapiClient::HTTPClient) }
-  subject(:link) { Link.parse({href: 'http://example.com/foo/bar/42', __content__: 'Example Site', rel: 'next'}) }
+  subject(:link) { Link.parse({href: 'http://example.com/foo/bar/42', __content__: 'Example Site', rel: 'next'}, {client: client}) }
   let(:result) { double(:result, foo: :bar) }
-  before(:example) { link.inject_client(client) }
 
   describe '.parse' do
 
@@ -23,7 +22,7 @@ describe KOSapiClient::Entity::Link do
 
     it 'encodes href URL' do
       href = 'parallels?query=(lastUpdatedDate%3E=2014-07-01T00:00:00;lastUpdatedDate%3C=2014-07-10T00:00:00)&offset=10&limit=10'
-      link = Link.new(nil, href, nil)
+      link = Link.new(nil, href, nil, nil)
       expect(link.link_href).to eq 'parallels?query=(lastUpdatedDate%3E=2014-07-01T00:00:00%3BlastUpdatedDate%3C=2014-07-10T00:00:00)&offset=10&limit=10'
     end
 
@@ -38,11 +37,6 @@ describe KOSapiClient::Entity::Link do
   end
 
   describe '#follow' do
-
-    it 'throws error when not http client set' do
-      link.inject_client(nil)
-      expect { link.follow }.to raise_error(RuntimeError)
-    end
 
     it 'calls http client with href' do
       expect(client).to receive(:send_request).with(:get, 'http://example.com/foo/bar/42')

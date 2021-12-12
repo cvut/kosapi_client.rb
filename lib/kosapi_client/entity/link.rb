@@ -4,16 +4,16 @@ module KOSapiClient
 
       attr_reader :link_title, :link_href, :link_rel
 
-      def initialize(title, href, rel, client = nil)
+      def initialize(title, href, rel, client)
         @link_title = title
         @link_href = escape_url(href)
         @link_rel = rel
         @client = client
       end
 
-      def self.parse(contents)
+      def self.parse(contents, context)
         href = contents[:xlink_href] || contents[:href]
-        new(contents[:__content__], href, contents[:rel])
+        new(contents[:__content__], href, contents[:rel], context[:client])
       end
 
       def link_id
@@ -21,12 +21,10 @@ module KOSapiClient
       end
 
       def follow
+        return @target unless @target.nil?
+
         raise "HTTP client not set, cannot send request to #{link_href}" unless @client
         @client.send_request(:get, link_href)
-      end
-
-      def inject_client(client)
-        @client = client
       end
 
       def target
