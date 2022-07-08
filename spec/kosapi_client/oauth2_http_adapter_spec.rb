@@ -13,7 +13,7 @@ describe KOSapiClient::OAuth2HttpAdapter, :vcr do
     end
   end
 
-  context 'with valid OAUTH credentials' do
+  context 'with valid OAUTH credentials', :integration do
     let(:credentials) { { client_id: ENV['KOSAPI_OAUTH_CLIENT_ID'], client_secret: ENV['KOSAPI_OAUTH_CLIENT_SECRET'] } }
 
     it 'fetches response from a REST resource' do
