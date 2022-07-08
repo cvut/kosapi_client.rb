@@ -1,6 +1,5 @@
 require 'corefines'
 require 'uri_template'
-require 'escape_utils'
 
 require 'kosapi_client/entity'
 require 'kosapi_client/resource'
