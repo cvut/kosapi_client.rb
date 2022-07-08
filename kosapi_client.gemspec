@@ -4,7 +4,7 @@ require File.expand_path('../lib/kosapi_client/version', __FILE__)
 Gem::Specification.new do |spec|
   spec.name          = 'kosapi_client'
   spec.version       = KOSapiClient::VERSION
-  spec.authors       = ['Tibor Szolár']
+  spec.authors       = ['Tibor Szolár', 'Jakub Jirutka']
   spec.email         = 'szolatib@fit.cvut.cz'
   spec.description   = 'REST client for KOSapi service'
   spec.summary       = 'Simple Ruby client library for accessing KOSapi service resources'
