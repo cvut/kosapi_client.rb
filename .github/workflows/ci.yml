@@ -25,7 +25,7 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - run: bundle exec rake spec
+      - run: bundle exec rspec --tag '~integration'  # skip integration tests
 
   publish:
     name: Publish to RubyGems
