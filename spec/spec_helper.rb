@@ -1,14 +1,10 @@
 require 'dotenv'
 Dotenv.load
 
-if ENV['CODECLIMATE_REPO_TOKEN']
-  require 'simplecov'
-  SimpleCov.start
-end
-
-if ENV['CI']
-  require 'coveralls'
-  Coveralls.wear!
+require 'simplecov'
+SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
+SimpleCov.start do
+  add_filter '/spec/'
 end
 
 require 'rspec/given'

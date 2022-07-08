@@ -1,14 +1,8 @@
 # KOSapi Client
 
-[![Gem Version](https://img.shields.io/gem/v/kosapi_client.svg)](rubygems)
+[![Gem Version](https://img.shields.io/gem/v/kosapi_client.svg)](https://rubygems.org/gems/kosapi_client)
 [![Build Status](https://github.com/cvut/kosapi_client.rb/workflows/CI/badge.svg)](https://github.com/cvut/kosapi_client.rb/actions?query=workflow%3A%22CI%22)
-[![Code Climate](http://img.shields.io/codeclimate/github/cvut/kosapi_client.rb.svg)][codeclimate]
-[![Coverage Status](https://img.shields.io/coveralls/cvut/kosapi_client.rb.svg)][coveralls]
 [![Inline docs](http://inch-ci.org/github/cvut/kosapi_client.rb.svg)](http://inch-ci.org/github/cvut/kosapi_client.rb)
-
-[rubygems]: https://rubygems.org/gems/kosapi_client
-[codeclimate]: https://codeclimate.com/github/cvut/kosapi_client.rb
-[coveralls]: https://coveralls.io/r/cvut/kosapi_client.rb
 
 A simple Ruby client library for [KOSapi RESTful service](https://kosapi.fit.cvut.cz).
 
