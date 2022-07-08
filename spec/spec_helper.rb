@@ -6,7 +6,7 @@ if ENV['CODECLIMATE_REPO_TOKEN']
   SimpleCov.start
 end
 
-if ENV['TRAVIS']
+if ENV['CI']
   require 'coveralls'
   Coveralls.wear!
 end
@@ -32,9 +32,9 @@ VCR.configure do |c|
       # TODO: Track down UTF-8 issue and remove
       #preserve_exact_body_bytes: true,
       #decode_compressed_response: true,
-      record: ENV['TRAVIS'] ? :none : :once
+      record: ENV['CI'] ? :none : :once
   }
   c.cassette_library_dir = 'spec/cassettes'
 end
 
-VCR.turn_off! ignore_cassettes: true if ENV['TRAVIS']
+VCR.turn_off! ignore_cassettes: true if ENV['CI']

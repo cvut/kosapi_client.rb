@@ -1,14 +1,13 @@
 # KOSapi Client
 
 [![Gem Version](https://img.shields.io/gem/v/kosapi_client.svg)](rubygems)
-[![Build Status](http://img.shields.io/travis/cvut/kosapi_client.rb.svg)][travis]
+[![Build Status](https://github.com/cvut/kosapi_client.rb/workflows/CI/badge.svg)](https://github.com/cvut/kosapi_client.rb/actions?query=workflow%3A%22CI%22)
 [![Dependency Status](http://img.shields.io/gemnasium/cvut/kosapi_client.rb.svg)][gemnasium]
 [![Code Climate](http://img.shields.io/codeclimate/github/cvut/kosapi_client.rb.svg)][codeclimate]
 [![Coverage Status](https://img.shields.io/coveralls/cvut/kosapi_client.rb.svg)][coveralls]
 [![Inline docs](http://inch-ci.org/github/cvut/kosapi_client.rb.svg)](http://inch-ci.org/github/cvut/kosapi_client.rb)
 
 [rubygems]: https://rubygems.org/gems/kosapi_client
-[travis]: http://travis-ci.org/cvut/kosapi_client.rb
 [gemnasium]: https://gemnasium.com/cvut/kosapi_client.rb
 [codeclimate]: https://codeclimate.com/github/cvut/kosapi_client.rb
 [coveralls]: https://coveralls.io/r/cvut/kosapi_client.rb
