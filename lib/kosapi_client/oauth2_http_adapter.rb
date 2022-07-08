@@ -27,7 +27,7 @@ module KOSapiClient
 
     def send_request(verb, url, options = {})
       raise 'No credentials set' if @credentials.empty?
-      token.request(verb, url, options)
+      token.request(verb, url, { snaky: false }.merge(options))
     end
 
     private
