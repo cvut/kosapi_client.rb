@@ -37,8 +37,14 @@ module KOSapiClient
         { href: link_href, rel: link_rel, title: link_title }
       end
 
-      def method_missing(method, *args, &block)
-        target.send(method, *args, &block)
+      if RUBY_VERSION >= '3.0'
+        def method_missing(method, *args, **kwargs, &block)
+          target.send(method, *args, **kwargs, &block)
+        end
+      else
+        def method_missing(method, *args, &block)
+          target.send(method, *args, &block)
+        end
       end
 
       def respond_to_missing?(method_name, include_private = false)
