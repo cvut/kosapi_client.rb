@@ -12,20 +12,19 @@ module KOSapiClient
 
     class << self
 
-      def parse(hash, client)
-        prev_link = parse_link(hash, 'prev', client)
-        next_link = parse_link(hash, 'next', client)
+      def parse(hash, context)
+        prev_link = parse_link(hash, 'prev', context)
+        next_link = parse_link(hash, 'next', context)
         new(prev_link, next_link)
       end
 
       private
-      def parse_link(hash, rel, client)
+      def parse_link(hash, rel, context)
         return nil unless hash
         link_hash = extract_link_hash(hash, rel)
+
         if link_hash
-          link = Entity::Link.parse(link_hash)
-          link.inject_client(client)
-          link
+          Entity::Link.parse(link_hash, context)
         end
       end
 
