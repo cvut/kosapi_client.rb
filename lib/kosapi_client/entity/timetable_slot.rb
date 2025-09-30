@@ -13,6 +13,7 @@ module KOSapiClient
       map_data :start_time, Time
       map_data :end_time, Time
       map_data :weeks, String
+      map_data :teachers, [Link], element: :teacher
 
     end
   end
