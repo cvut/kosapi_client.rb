@@ -13,6 +13,7 @@ module KOSapiClient
     resource :parallels
     resource :parameters
     resource :exams
+    resource :schedule_slots
     resource :semesters
     resource :teachers
 
