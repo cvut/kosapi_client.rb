@@ -8,7 +8,7 @@ module KOSapiClient
         @name = name
       end
 
-      def self.parse(contents)
+      def self.parse(contents, context = {})
         new(contents[:atom_name])
       end
     end

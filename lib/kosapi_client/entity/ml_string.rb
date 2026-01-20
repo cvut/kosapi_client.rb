@@ -17,7 +17,7 @@ module KOSapiClient
         @translations[lang]
       end
 
-      def self.parse(item)
+      def self.parse(item, context = {})
         unless item.is_a?(Array)
           item = [item]
         end
