@@ -32,4 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'uri_template', '~> 0.7.0'
   # Required for correct XML namespace handling (MultiXML, oauth2).
   spec.add_runtime_dependency 'ox', '~> 2.1'
+  # Version 0.9.0 dropped 'atom_' prefixes in atom field names by default
+  spec.add_runtime_dependency 'multi_xml', '< 0.9'
 end
